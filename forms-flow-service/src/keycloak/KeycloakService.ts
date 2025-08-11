@@ -43,7 +43,7 @@ class KeycloakService {
         automaticSilentRenew: true,
         userStore: new WebStorageStateStore({ store: window.localStorage }),
         monitorSession: false,
-        loadUserInfo: false
+        loadUserInfo: true
       };
       this.userManager = new UserManager(this._userManagerConfig);
       
