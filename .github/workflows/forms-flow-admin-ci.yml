@@ -1,0 +1,92 @@
+name: forms-flow-admin-CI
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
+      - main-rsbc
+      - develop
+    paths:
+      - "forms-flow-admin/**"
+defaults:
+  run:
+    shell: bash
+    working-directory: ./forms-flow-admin
+
+jobs:
+  setup-job:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - run: "true"
+
+  Lint:
+    if: false
+    needs: setup-job
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v5
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: Linting
+        run: |
+          npm run lint
+
+  Test:
+    if: false
+    needs: setup-job
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v5
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: Unit Test
+        id: test
+        run: |
+          npm test a
+
+  Build:
+    if: always()
+    needs: setup-job
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v5
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: build to check strictness
+        id: build
+        run: |
+          npm run build
+
