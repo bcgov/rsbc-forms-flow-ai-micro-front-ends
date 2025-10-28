@@ -282,6 +282,7 @@ describe('BCMapSelector Data Persistence', () => {
       expect(component.data.boundaryViolation).toBe(false);
       expect((component as any).emit).toHaveBeenCalledWith('mapSelected', {
         data: {
+          address: 'Victoria, BC',
           lat: '48.4284',
           long: '-123.3656'
         }

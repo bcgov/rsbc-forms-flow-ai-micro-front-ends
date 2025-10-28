@@ -17,6 +17,6 @@ jobs:
       working_directory: ./forms-flow-rsbcservice
       node_version: '20.x'
       enable_lint: false
-      enable_test: false
+      enable_test: true
       enable_build: true
 

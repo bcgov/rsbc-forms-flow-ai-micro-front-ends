@@ -29,7 +29,7 @@ describe('AddressSearch Component', () => {
       />
     );
 
-    expect(screen.getByPlaceholderText(/Search addresses using Test Provider/)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Search addresses.../)).toBeInTheDocument();
   });
 
   it('shows disabled message when geocoding is disabled', () => {
@@ -70,7 +70,7 @@ describe('AddressSearch Component', () => {
       />
     );
 
-    const input = screen.getByPlaceholderText(/Search addresses using Test Provider/);
+    const input = screen.getByPlaceholderText(/Search addresses.../);
     fireEvent.change(input, { target: { value: 'Vancouver' } });
 
     await waitFor(() => {
@@ -103,7 +103,7 @@ describe('AddressSearch Component', () => {
       />
     );
 
-    const input = screen.getByPlaceholderText(/Search addresses using Test Provider/);
+    const input = screen.getByPlaceholderText(/Search addresses.../);
     fireEvent.change(input, { target: { value: 'Vancouver' } });
 
     await waitFor(() => {
@@ -130,7 +130,7 @@ describe('AddressSearch Component', () => {
       />
     );
 
-    const input = screen.getByPlaceholderText(/Search addresses using Test Provider/);
+    const input = screen.getByPlaceholderText(/Search addresses.../);
     fireEvent.change(input, { target: { value: 'Invalid Address' } });
 
     await waitFor(() => {
@@ -147,7 +147,7 @@ describe('AddressSearch Component', () => {
       />
     );
 
-    const input = screen.getByPlaceholderText(/Search addresses using Test Provider/);
+    const input = screen.getByPlaceholderText(/Search addresses.../);
     fireEvent.change(input, { target: { value: 'Vancouver' } });
 
     expect(input).toHaveValue('Vancouver');

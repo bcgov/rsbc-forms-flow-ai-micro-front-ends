@@ -63,15 +63,15 @@ export class GeolocationService {
           let message: string;
 
           switch (error.code) {
-            case error.PERMISSION_DENIED:
+            case 1: // PERMISSION_DENIED
               errorType = 'permission_denied';
               message = 'Location access denied by user';
               break;
-            case error.POSITION_UNAVAILABLE:
+            case 2: // POSITION_UNAVAILABLE
               errorType = 'position_unavailable';
               message = 'Location information is unavailable';
               break;
-            case error.TIMEOUT:
+            case 3: // TIMEOUT
               errorType = 'timeout';
               message = 'Location request timed out';
               break;
@@ -128,15 +128,15 @@ export class GeolocationService {
           let message: string;
 
           switch (error.code) {
-            case error.PERMISSION_DENIED:
+            case 1: // PERMISSION_DENIED
               errorType = 'permission_denied';
               message = 'Location access denied by user';
               break;
-            case error.POSITION_UNAVAILABLE:
+            case 2: // POSITION_UNAVAILABLE
               errorType = 'position_unavailable';
               message = 'Location information is unavailable';
               break;
-            case error.TIMEOUT:
+            case 3: // TIMEOUT
               errorType = 'timeout';
               message = 'Location request timed out';
               break;
