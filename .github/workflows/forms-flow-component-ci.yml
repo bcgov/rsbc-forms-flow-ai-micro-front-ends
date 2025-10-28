@@ -1,5 +1,4 @@
-name: forms-flow-admin-CI
-
+name: forms-flow-components-CI
 on:
   workflow_dispatch:
   push:
@@ -8,15 +7,14 @@ on:
       - main-rsbc
       - develop
     paths:
-      - "forms-flow-admin/**"
+      - "forms-flow-components/**"
 
 jobs:
   ci:
     uses: ./.github/workflows/ci-workflow.yml
     with:
-      working_directory: ./forms-flow-admin
+      working_directory: ./forms-flow-components
       node_version: '20.x'
       enable_lint: false
       enable_test: false
       enable_build: true
-
