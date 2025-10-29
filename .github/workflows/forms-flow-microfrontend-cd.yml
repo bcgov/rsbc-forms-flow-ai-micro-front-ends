@@ -5,8 +5,8 @@ on:
   pull_request:
     types: [opened, reopened, edited, synchronize]
     branches:
-      - rsbc/**
-      - release/**
+      - main-rsbc
+      - develop
 
 defaults:
   run:
