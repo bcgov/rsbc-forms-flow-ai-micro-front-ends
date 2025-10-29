@@ -127,6 +127,11 @@ class OfflineSaveService {
           await rsbcDb.chargeTypes.bulkPut(data);
           console.log("Charge types data saved to IndexedDB.");
           break;
+        case "tar_police_agencies":
+          await rsbcDb.tarPoliceAgencies.clear();
+          await rsbcDb.tarPoliceAgencies.bulkPut(data);
+          console.log("TAR Police Agencies data saved to IndexedDB.");
+          break;
         default:
           console.log(`No matching table found for resource: ${resourceName}`);
       }

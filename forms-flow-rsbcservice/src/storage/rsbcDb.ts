@@ -128,6 +128,13 @@ interface ChargeType {
   description: string;
 }
 
+interface TarPoliceAgency {
+  code: number;
+  district_id: number;
+  agency_name: string;
+  vjur_agency: number;
+}
+
 // Database class extending Dexie to manage IndexedDB storage
 class DigitalFormsDB extends Dexie {
   // Declaring tables with their respective interfaces
@@ -149,6 +156,7 @@ class DigitalFormsDB extends Dexie {
   lkiHighway!: Table<LKIHighway>;
   lkiSegment!: Table<LKISegment>;
   chargeTypes!: Table<ChargeType>;
+  tarPoliceAgencies!: Table<TarPoliceAgency>;
 
   constructor() {
     super("digitalFormsFF");
@@ -188,6 +196,10 @@ class DigitalFormsDB extends Dexie {
     this.version(6).stores({
       chargeTypes: "id, code, statuteCode, description"
     })
+
+    this.version(7).stores({
+      tarPoliceAgencies: "code, district_id, agency_name, vjur_agency"
+    });
   }
 }
 
