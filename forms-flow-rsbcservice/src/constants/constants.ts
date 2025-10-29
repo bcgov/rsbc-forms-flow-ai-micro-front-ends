@@ -14,27 +14,29 @@ export const StaticResources = [
     "jurisdiction_country",
     "lki_highway",
     "lki_segment",
-    "charge_types"
+    "charge_types",
+    "tar_police_agencies"
   ];
 
   export const StaticTables = [
-    'vehicles',
-    'vehicleStyles',
-    'vehicleColours',
-    'provinces',
-    'jurisdictions',
-    'impoundLotOperators',
-    'countries',
-    'cities',
-    'agencies',
-    'vehicleTypes',
-    'nscPuj',
-    'jurisdictionCountry', 
-    'formID',
-    'user',
+    "vehicles",
+    "vehicleStyles",
+    "vehicleColours",
+    "provinces",
+    "jurisdictions",
+    "impoundLotOperators",
+    "countries",
+    "cities",
+    "agencies",
+    "vehicleTypes",
+    "nscPuj",
+    "jurisdictionCountry", 
+    "formID",
+    "user",
     "lkiHighway",
     "lkiSegment",
-    'chargeTypes'
+    "chargeTypes",
+    "tarPoliceAgencies"
   ];
 
   export const FormTypes = ["12Hour", "24Hour", "VI", "MV6020"];
