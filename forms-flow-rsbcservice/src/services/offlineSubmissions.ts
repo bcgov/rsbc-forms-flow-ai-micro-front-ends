@@ -259,7 +259,7 @@ class OfflineSubmissions {
     const formioPayload = {
       data: {
         ...data.data,
-        submittedOffline: true
+        submitted_offline: true
       },
       metadata: data.submissionData?.metadata,
       state: data.submissionData?.state,
