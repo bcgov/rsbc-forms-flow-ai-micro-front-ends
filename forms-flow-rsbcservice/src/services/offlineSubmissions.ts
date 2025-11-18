@@ -257,7 +257,10 @@ class OfflineSubmissions {
   ) {
     const formioUrl = `${API_URL}/form/${data.formId}/submission`;
     const formioPayload = {
-      data: data.data,
+      data: {
+        ...data.data,
+        submitted_offline: true
+      },
       metadata: data.submissionData?.metadata,
       state: data.submissionData?.state,
       _vnote: data.submissionData?._vnote
