@@ -14,7 +14,6 @@ export const StaticResources = [
     "jurisdiction_country",
     "lki_highway",
     "lki_segment",
-    "charge_types",
     "tar_police_agencies"
   ];
 
@@ -35,7 +34,6 @@ export const StaticResources = [
     "user",
     "lkiHighway",
     "lkiSegment",
-    "chargeTypes",
     "tarPoliceAgencies"
   ];
 
