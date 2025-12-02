@@ -51,7 +51,8 @@
     "webpack-cli": "^4.10.0",
     "webpack-config-single-spa-ts": "^4.1.4",
     "webpack-dev-server": "^4.15.2",
-    "webpack-merge": "^5.10.0"
+    "webpack-merge": "^5.10.0",
+    "jest-environment-jsdom": "^30.2.0"
   },
   "dependencies": {
     "@aot-technologies/formio-react": "^1.0.4",
