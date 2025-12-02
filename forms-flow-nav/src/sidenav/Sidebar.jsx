@@ -13,6 +13,7 @@ import {
   ENABLE_APPLICATIONS_MODULE,
   ENABLE_TASKS_MODULE,
   ENABLE_INTEGRATION_PREMIUM,
+  ENABLE_SUPPORT_MODULE,
   IS_ENTERPRISE
 } from "../constants/constants";
 import { StorageService } from "@formsflow/service";
@@ -73,6 +74,7 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
   const isAuthenticated = instance?.isAuthenticated();
   const showApplications = setShowApplications(userDetail?.groups);
   const [activeKey,setActiveKey] = useState(0);
+  const FEEDBACK_ROUTE = "feedback";
 
   const getInitials = (name) => {
     if (!name) return "";
@@ -176,6 +178,10 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
       value: "manage",
       supportedRoutes: ["admin/dashboard", "admin/roles", "admin/users"],
     },
+    SUPPORT: {
+      value: "support",
+      supportedRoutes: ["feedback"],
+    },
   };  
   
   useEffect((()=>{
@@ -185,6 +191,7 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
       { key: SectionKeys.REVIEW.value, supportedRoutes: SectionKeys.REVIEW.supportedRoutes },
       { key: SectionKeys.ANALYZE.value, supportedRoutes: SectionKeys.ANALYZE.supportedRoutes },
       { key: SectionKeys.MANAGE.value, supportedRoutes: SectionKeys.MANAGE.supportedRoutes },
+      { key: SectionKeys.SUPPORT.value, supportedRoutes: SectionKeys.SUPPORT.supportedRoutes },
     ];
     
     const activeSection =
@@ -373,6 +380,21 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
                 subscribe={props.subscribe}
               />
             )}
+            {ENABLE_SUPPORT_MODULE && (
+              <MenuComponent
+                baseUrl={baseUrl}
+                eventKey={SectionKeys.SUPPORT.value}
+                optionsCount="1"
+                mainMenu="Support"
+                subMenu={[
+                  {
+                    name: "Feedback",
+                    path: FEEDBACK_ROUTE
+                  }
+                ]}
+                subscribe={props.subscribe}
+              />
+            )}            
           </Accordion>
         </div>
         {(APPLICATION_NAME === "roadsafety") && isAuthenticated && (
