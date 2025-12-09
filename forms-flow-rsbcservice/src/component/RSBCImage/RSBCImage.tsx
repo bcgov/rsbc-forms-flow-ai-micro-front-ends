@@ -281,14 +281,44 @@ export default class RSBCImage extends ReactComponent {
     const base64Images: Record<string, string> = {};
     const imageKeys = ["VI", "TwentyFourHour", "IRP", "TwelveHour"];
 
+    // Create a container to hold the elements for capture
+    const container = document.createElement("div");
+    // Position it fixed so it doesn't affect page layout, but keep it "visible"
+    // using opacity: 0 instead of display: none or visibility: hidden
+    container.style.position = "fixed";
+    container.style.top = "0";
+    container.style.left = "0";
+    // Ensure the container is large enough to not clip content
+    container.style.width = "2000px"; // Set a large enough width
+    container.style.height = "auto";
+    container.style.zIndex = "-1000";
+    container.style.opacity = "0"; // Hide from user but keep renderable
+    container.style.pointerEvents = "none";
+    // container.style.backgroundColor = "#ffffff";
+    
+    document.body.appendChild(container);
+
     for (const key of imageKeys) {
       if (data[key]) {
         const element = this.convertToHTMLElement(svgImages[key]);
         if (element) {
           this.injectStyles(element);
-          document.body.appendChild(element);
-          base64Images[`${key}_form_png`] = await this.safeToPng(element);
-          document.body.removeChild(element);
+          container.appendChild(element);
+
+          // Add a small delay to ensure layout and paint are complete
+          await new Promise((resolve) => setTimeout(resolve, 100));
+
+          base64Images[`${key}_form_png`] = await this.safeToPng(element, {
+            // backgroundColor: "#ffffff",
+            width: element.scrollWidth, // Explicitly tell toPng the full width
+            height: element.scrollHeight,
+            style: {
+              // Ensure no transform or margins interfere during capture
+              transform: 'none',
+              margin: '0'
+            }
+          });
+          container.removeChild(element);
         }
       }
     }
@@ -300,11 +330,11 @@ export default class RSBCImage extends ReactComponent {
   }
 
   // Converts an HTML element to a PNG image while suppressing console errors.
-  async safeToPng(element: HTMLElement) {
+  async safeToPng(element: HTMLElement, options?: any) {
     const originalConsoleError = console.error;
     try {
       console.error = () => {};
-      return await toPng(element);
+      return await toPng(element, options);
     } catch (error) {
       console.error = originalConsoleError;
       throw error;
