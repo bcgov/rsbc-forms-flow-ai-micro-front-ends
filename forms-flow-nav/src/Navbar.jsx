@@ -17,7 +17,8 @@ import {
   ENABLE_DASHBOARDS_MODULE,
   ENABLE_APPLICATIONS_MODULE,
   ENABLE_TASKS_MODULE,
-  ENABLE_INTEGRATION_PREMIUM
+  ENABLE_INTEGRATION_PREMIUM,
+  ENABLE_SUPPORT_MODULE
 } from "./constants/constants";
 import "./Navbar.scss";
 import { StorageService } from "@formsflow/service";
@@ -447,6 +448,24 @@ const isUserManager = userRoles?.includes("manage_users");
             {t("Dashboards")}
           </Nav.Link>
         )}
+
+      {ENABLE_SUPPORT_MODULE && (
+        <Nav.Link
+          eventKey={"feedback"}
+          as={Link}
+          to={`${baseUrl}feedback`}
+          id="feedback-nav-link"
+          data-testid="feedback-nav-link"
+          className={`nav-menu-item py-md-3 px-0 mx-2 ${
+            pathname.match(createURLPathMatchExp("feedback", baseUrl))
+              ? "active"
+              : ""
+          }`}
+        >
+          <i className="fa-solid fa-gauge-high me-2" />
+          {t("Feedback")}
+        </Nav.Link>
+      )}
     </Nav>
 
     <Nav className="nav-user" data-testid="nav-user">

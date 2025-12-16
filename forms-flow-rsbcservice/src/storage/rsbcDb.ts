@@ -121,13 +121,6 @@ interface LKISegment {
   length: number;
 }
 
-interface ChargeType {
-  id: number;
-  code: string;
-  statuteCode: string;
-  description: string;
-}
-
 interface TarPoliceAgency {
   code: number;
   district_id: number;
@@ -155,7 +148,6 @@ class DigitalFormsDB extends Dexie {
   jurisdictionCountry!: Table<JurisdictionCountry>;
   lkiHighway!: Table<LKIHighway>;
   lkiSegment!: Table<LKISegment>;
-  chargeTypes!: Table<ChargeType>;
   tarPoliceAgencies!: Table<TarPoliceAgency>;
 
   constructor() {
@@ -200,6 +192,10 @@ class DigitalFormsDB extends Dexie {
     this.version(7).stores({
       tarPoliceAgencies: "code, district_id, agency_name, vjur_agency"
     });
+
+    this.version(8).stores({
+      chargeTypes: null
+    })
   }
 }
 

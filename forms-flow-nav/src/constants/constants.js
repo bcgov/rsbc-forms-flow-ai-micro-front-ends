@@ -87,6 +87,12 @@ export const ENABLE_APPLICATIONS_MODULE =
     ? false
     : true;
 
+export const ENABLE_SUPPORT_MODULE =
+  window._env_?.REACT_APP_ENABLE_SUPPORT_MODULE === "false" ||
+  window._env_?.REACT_APP_ENABLE_SUPPORT_MODULE === false
+    ? false
+    : true;
+
 export const KEYCLOAK_URL_HTTP_RELATIVE_PATH =
     (window._env_ && window._env_.REACT_APP_KEYCLOAK_URL_HTTP_RELATIVE_PATH) || '/auth';
   
