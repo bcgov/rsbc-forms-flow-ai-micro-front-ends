@@ -12,6 +12,7 @@ import {
 } from "./printUtils";
 import _ from "lodash";
 import "./printContainer.scss";
+import { max } from "moment";
 
 export default class RSBCImage extends ReactComponent {
   data: any;
@@ -289,12 +290,12 @@ export default class RSBCImage extends ReactComponent {
     container.style.top = "0";
     container.style.left = "0";
     // Ensure the container is large enough to not clip content
-    container.style.width = "2000px"; // Set a large enough width
+    container.style.width = "2550px"; // Set a large enough width
     container.style.height = "auto";
     container.style.zIndex = "-1000";
     container.style.opacity = "0"; // Hide from user but keep renderable
     container.style.pointerEvents = "none";
-    // container.style.backgroundColor = "#ffffff";
+    container.style.backgroundColor = "#ffffff";
     
     document.body.appendChild(container);
 
@@ -303,17 +304,25 @@ export default class RSBCImage extends ReactComponent {
         const element = this.convertToHTMLElement(svgImages[key]);
         if (element) {
           this.injectStyles(element);
+          
+          // Force element to fit container
+          element.style.width = "100%";
+          element.style.height = "auto";
+
           container.appendChild(element);
 
           // Add a small delay to ensure layout and paint are complete
           await new Promise((resolve) => setTimeout(resolve, 100));
 
+          const contentHeight = element.scrollHeight;
+
           base64Images[`${key}_form_png`] = await this.safeToPng(element, {
-            // backgroundColor: "#ffffff",
-            width: element.scrollWidth, // Explicitly tell toPng the full width
-            height: element.scrollHeight,
+            width: 2550,
+            height: contentHeight,
+            canvasWidth: 2550,
+            canvasHeight: contentHeight,
+            pixelRatio: 1,
             style: {
-              // Ensure no transform or margins interfere during capture
               transform: 'none',
               margin: '0'
             }
