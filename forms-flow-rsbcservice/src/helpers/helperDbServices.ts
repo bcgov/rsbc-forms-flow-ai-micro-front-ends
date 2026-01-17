@@ -91,6 +91,25 @@ class DBServiceHelper {
   public static getUserDetails(): any {
     return JSON.parse(StorageService.get(StorageService.User.USER_DETAILS));
   }
+
+  /**
+   * Retrieves user GUID based on identity provider.
+   * @returns {string} - User ID
+   */
+  public static getUserGuid(): string | null {
+    const userDetails = this.getUserDetails();
+    let userId = null;
+    if (userDetails?.identity_provider === "idir") {
+      userId = userDetails.idir_user_guid;
+    } else if (userDetails?.identity_provider === "bceid") {
+      userId = userDetails.bceid_user_guid;
+    } else {
+      userId = userDetails.sub; // for non BCGov Keycloak
+    }
+    return userId;
+  }
+
+
   /**
    * Retrieves authorization token from storage.
    * @returns string - authorization token.

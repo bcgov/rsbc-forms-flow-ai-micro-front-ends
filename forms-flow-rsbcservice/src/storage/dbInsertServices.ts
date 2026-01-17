@@ -189,16 +189,7 @@ class OfflineSaveService {
    */
   public static async fetchAndSaveUserDataAndRoles(): Promise<void> {
     // get user data
-    const userDetails = DBServiceHelper.getUserDetails();
-
-    let userId = null;
-    if (userDetails?.identity_provider === "idir") {
-      userId = userDetails.idir_user_guid;
-    } else if (userDetails?.identity_provider === "bceid") {
-      userId = userDetails.bceid_user_guid;
-    } else {
-      userId = userDetails.sub; // for non BCGov Keycloak
-    }
+    const userId = DBServiceHelper.getUserGuid();
     if (userId) {
       await getUserData(
         userId,
