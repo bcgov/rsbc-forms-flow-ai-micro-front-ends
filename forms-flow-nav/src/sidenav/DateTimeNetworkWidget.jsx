@@ -19,21 +19,20 @@ const DateTimeNetworkWidget = () => {
       setIsDaytime(hour >= 6 && hour < 18);
     };
 
-    const updateNetworkStatus = () => {
-      setIsOnline(navigator.onLine);
+    const updateNetworkStatus = (isOnline) => {
+      setIsOnline(isOnline);
     };
 
     const intervalId = setInterval(updateTime, 1000);
-    window.addEventListener("online", updateNetworkStatus);
-    window.addEventListener("offline", updateNetworkStatus);
+    const connectivityMonitor = window.connectivityMonitor;
+    connectivityMonitor.subscribe(updateNetworkStatus);
 
     updateTime();
-    updateNetworkStatus();
+    updateNetworkStatus(connectivityMonitor.getIsOnline());
 
     return () => {
       clearInterval(intervalId);
-      window.removeEventListener("online", updateNetworkStatus);
-      window.removeEventListener("offline", updateNetworkStatus);
+      connectivityMonitor.unsubscribe(updateNetworkStatus);
     };
   }, []);
 

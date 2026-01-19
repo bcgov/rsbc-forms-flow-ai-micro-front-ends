@@ -25,10 +25,10 @@ class KeycloakService {
     private token: string | undefined;
     private _user: User | undefined;
     private timerId: any = 0;
-    private static jwtTimerId: any = 0;
+    private jwtTimerId: any = 0;
     private userData: any;
     private isInitialized: boolean = false; // Track if UserManager is initialized
-    private isOfflineMode: boolean = false; // Track if running in offline mode
+    private _connectivityMonitor: any;
 
     private constructor(url: string, realm: string, clientId: string, tenantId?: string) {
       const actualClientId = tenantId ? `${tenantId}-${clientId}` : clientId;
@@ -46,6 +46,16 @@ class KeycloakService {
         loadUserInfo: true
       };
       this.userManager = new UserManager(this._userManagerConfig);
+      this._connectivityMonitor = window['connectivityMonitor'];
+      if (!this._connectivityMonitor) {
+        window.addEventListener('connectivityMonitorReady', () => {
+          this._connectivityMonitor = window['connectivityMonitor'];
+        }, { once: true });
+      }
+
+      // Enable logging for oidc-client-ts
+      Log.setLogger(console);
+      Log.setLevel(Log.INFO);
       
       // Set up event handlers
       this.setupEventHandlers();
@@ -56,27 +66,33 @@ class KeycloakService {
      */
     private setupEventHandlers(): void {
       this.userManager!.events.addAccessTokenExpiring(() => {
-        console.log("Access token expiring...");
+        console.log("[KeycloakService] Access token expiring...");
+        this.refreshToken();
       });
 
       this.userManager!.events.addAccessTokenExpired(() => {
-        console.log("Access token expired");
+        console.log("[KeycloakService] Access token expired");
         this.handleTokenRefreshFailure();
       });
 
       this.userManager!.events.addSilentRenewError((error) => {
-        console.error("Silent renew error:", error);
+        console.error("[KeycloakService] Silent renew error:", error);
         this.handleTokenRefreshFailure();
       });
 
       this.userManager!.events.addUserLoaded((user) => {
-        console.log("User loaded:", user);
+        console.log("[KeycloakService] User loaded:", user);
         this.handleUserLoaded(user);
       });
 
       this.userManager!.events.addUserUnloaded(() => {
-        console.log("User unloaded");
+        console.log("[KeycloakService] User unloaded");
         this.handleUserUnloaded();
+      });
+
+      console.log("[KeycloakService] Setting up connectivity monitor subscription", this._connectivityMonitor);
+      this._connectivityMonitor.subscribe((online: boolean) => {
+        this.handleOnline(online);
       });
     }
 
@@ -108,7 +124,6 @@ class KeycloakService {
       this.token = undefined;
       this.userData = undefined;
       this.isInitialized = false;
-      this.isOfflineMode = false;
     }
   
     private async login(): Promise<void> {
@@ -119,7 +134,6 @@ class KeycloakService {
   
     private async logout(): Promise<void> {
       this.isInitialized = false; // Reset initialization state
-      this.isOfflineMode = false; // Reset offline mode
       if (this.userManager) {
         await this.userManager.signoutRedirect();
       }
@@ -153,18 +167,13 @@ class KeycloakService {
       if (userDetailsStr) {
         this.userData = JSON.parse(userDetailsStr);
       }
-
-      this.isOfflineMode = true;
       this.isInitialized = true;
       
-      console.log("Initialized in offline mode with stored credentials");
-      
-      // Set up online listener to reinitialize when back online
-      this.setupOnlineListener();
-      
+      console.log("[KeycloakService] Initialized in offline mode with stored credentials");
+            
       return true;
     } catch (error) {
-      console.error("Failed to initialize offline mode:", error);
+      console.error("[KeycloakService] Failed to initialize offline mode:", error);
       return false;
     }
   }
@@ -172,24 +181,21 @@ class KeycloakService {
   /**
    * Setup listener for when the user comes back online
    */
-  private setupOnlineListener(): void {
-    const handleOnline = () => {
-      console.log("Back online: Reinitializing Keycloak");
-      this.isOfflineMode = false;
+  private async handleOnline(isOnline: boolean) : Promise<void> {
+    if (isOnline) {
+      console.log("[KeycloakService] Back online: Reinitializing Keycloak");
       this.isInitialized = false;
       
       // Reinitialize Keycloak when back online
       this.initKeycloak((authenticated) => {
         if (authenticated) {
-          console.log("Successfully reinitialized Keycloak after coming back online");
+          console.log("[KeycloakService] Successfully reinitialized Keycloak after coming back online");
         }
       });
-      
-      // Remove the listener as we've handled the online event
-      window.removeEventListener("online", handleOnline);
-    };
 
-    window.addEventListener("online", handleOnline, { once: true });
+      await this.retryTokenRefresh();
+      await this.updateJwtToken();
+    }
   }
   
     /**
@@ -200,32 +206,30 @@ class KeycloakService {
       if (this._user?.expires_at) {
         const currentTime = Math.floor(Date.now() / 1000);
         const tokenExpireTime = (this._user.expires_at - currentTime) * 1000;
+        console.debug(`[KeycloakService] Token expires in ${tokenExpireTime/1000/60} minutes`);
         return Math.max(tokenExpireTime, 60000); // Minimum 1 minute
       } else {
         return 60000; // Default 1 minute
       }
     }
 
-    private async oidcUpdateToken(timeEnabled = false): Promise<void> {
+    private async oidcUpdateToken(): Promise<void> {
       // Skip token update if in offline mode
-      if (this.isOfflineMode) {
-        console.debug("Offline mode: Skipping token update");
+      if (this.isInOfflineMode()) {
+        console.debug("[KeycloakService] Offline mode: Skipping token update");
         return;
       }
 
       try {
+        console.log("[KeycloakService] Attempting to refresh OIDC token...");
         const user = await this.userManager!.signinSilent();
         if (user) {
-          console.log("Token refreshed!");
+          console.log("[KeycloakService] Token refreshed!");
           this.handleUserLoaded(user);
         }
       } catch (error) {
-        console.error("OIDC token update failed!", error);
+        console.error("[KeycloakService] OIDC token update failed!", error);
         this.handleTokenRefreshFailure();
-      } finally {
-        if (timeEnabled) {
-          clearInterval(this.timerId);
-        }
       }
     }
 
@@ -234,18 +238,21 @@ class KeycloakService {
      */
     private refreshToken(skipTimer: boolean = false): void {
       // Skip token refresh setup if in offline mode
-      if (this.isOfflineMode) {
-        console.debug("Offline mode: Skipping token refresh setup");
+      if (this.isInOfflineMode()) {
+        console.debug("[KeycloakService] Offline mode: Skipping token refresh setup");
         return;
       }
-      
+
+      clearInterval(this.timerId);
+
+      console.log("[KeycloakService] Setting up token refresh interval");
       this.timerId = setInterval(
         async () => {
-          if (!navigator.onLine) {
-            console.debug("Offline: Skipping token refresh.");
+          if (!this._connectivityMonitor.getIsOnline()) {
+            console.debug("[KeycloakService] Offline: Skipping token refresh.");
             return;
           }
-          await this.oidcUpdateToken(true);
+          await this.oidcUpdateToken();
         },
         !skipTimer && APPLICATION_NAME === "roadsafety"
           ? this.getTokenExpireTime()
@@ -262,22 +269,13 @@ class KeycloakService {
      * Handle token refresh failure
      */
     private handleTokenRefreshFailure(): void {
-      if (!navigator.onLine) {
+      if (!this._connectivityMonitor.getIsOnline()) {
         if (!this.isWaitingForOnline) {
           this.isWaitingForOnline = true;
           console.debug(
-            "Offline detected: Retrying token refresh when back online."
-          );
-          window.addEventListener(
-            "online",
-            () => {
-              this.retryTokenRefresh(); // This will be executed when the 'online' event occurs
-            },
-            { once: true }
+            "[KeycloakService] Offline detected: Retrying token refresh when back online."
           );
         }
-      } else {
-        this.logout();
       }
     }
 
@@ -285,14 +283,12 @@ class KeycloakService {
      * Retry token refresh when the user is back online
     */
     public async retryTokenRefresh(): Promise<void> {
-      console.log("Back online: Retrying token refresh.");
-      let skipTimer: boolean = false;
+      console.log("[KeycloakService] Back online: Retrying token refresh.");
       if (APPLICATION_NAME === "roadsafety") {
-        skipTimer = true;
         const storedEncryptedRefreshToken = StorageService.get(StorageService.User.REFRESH_TOKEN);
         if (storedEncryptedRefreshToken) {
           // With oidc-client-ts, refresh tokens are handled automatically
-          console.log("Found stored refresh token for retry");
+          console.log("[KeycloakService] Found stored refresh token for retry");
         }
       }
       this.isWaitingForOnline = false;
@@ -305,7 +301,7 @@ class KeycloakService {
      * 
      * @param response - The HTTP response containing the JWT token in headers.
      */
-    private static saveJwtToken(response: any): void {
+    private saveJwtToken(response: any): void {
       const jwtToken = response.headers["x-jwt-token"];
       if (jwtToken) {
         StorageService.save(StorageService.User.FORMIO_TOKEN, jwtToken);
@@ -317,14 +313,14 @@ class KeycloakService {
      * stores it using `saveJwtToken()`. This is useful for refreshing
      * the token periodically or on session extension.
      */
-    public static async updateJwtToken(): Promise<void> {
+    public async updateJwtToken(): Promise<void> {
       try {
         const response = await getUpdatedJwtToken();
         if (response) {
           this.saveJwtToken(response);
         }
       } catch (error) {
-        console.error("Failed to update JWT token", error);
+        console.error("[KeycloakService] Failed to update JWT token", error);
       }
     }
 
@@ -332,11 +328,11 @@ class KeycloakService {
      * Stops the polling mechanism for refreshing the JWT token
      * by clearing the interval timer.
      */
-    private static clearPolling(): void {
+    private clearPolling(): void {
       if (this.jwtTimerId) {
         clearInterval(this.jwtTimerId);
         this.jwtTimerId = 0;
-        console.log("Polling stopped.");
+        console.log("[KeycloakService] Polling stopped.");
       }
     }
 
@@ -353,22 +349,22 @@ class KeycloakService {
      *
      * @param skipTimer - If true, bypasses the default interval check (used for forced/immediate refresh).
     */
-    private static refreshJwtToken(skipTimer: boolean = false): void {
+    private refreshJwtToken(skipTimer: boolean = false): void {
       const parsedValue = Number(FORMIO_JWT_EXPIRE);
       const jwtExpireMinutes = isNaN(parsedValue)
         ? DEFAULT_FORMIO_JWT_EXPIRE
         : parsedValue;
 
-      // 2 seconds buffer (2000 ms)
-      const checkInterval = jwtExpireMinutes * 60 * 1000 - 2000;
+      // 30 seconds buffer (30000 ms)
+      const checkInterval = jwtExpireMinutes * 60 * 1000 - 30000;
 
       this.clearPolling(); // Clear previous interval before starting new
 
       this.jwtTimerId = setInterval(
         () => {
           (async () => {
-            if (!navigator.onLine) {
-              console.debug("Offline: Skipping token refresh.");
+            if (!this._connectivityMonitor.getIsOnline()) {
+              console.debug("[KeycloakService] Offline: Skipping JWT token refresh.");
               return;
             }
             await this.updateJwtToken();
@@ -377,12 +373,12 @@ class KeycloakService {
         !skipTimer && APPLICATION_NAME === "roadsafety" ? checkInterval : 0
       );
       console.log(
-        `JWT polling started with interval: ${checkInterval} ms (${jwtExpireMinutes} minutes - 2 seconds)`
+        `[KeycloakService] JWT polling started with interval: ${checkInterval/1000/60} minutes (${jwtExpireMinutes} minutes - 30 seconds)`
       );
     }
   
     /**
-     *
+     * Get the singleton instance of KeycloakService
      * @param url - Valid keycloak url
      * @param realm - Valid keycloak realm
      * @param clientId - Valid keycloak clientId
@@ -407,12 +403,14 @@ class KeycloakService {
      */
     public async initKeycloak(callback: (authenticated: boolean) => void = () => {}): Promise<void> {
       if (this.isInitialized) {
+        this.refreshToken();
+        this.refreshJwtToken();
         callback(true); // Proceed as initialized
         return; // Exit the method if already initialized
       }
 
       // Check if offline and try to initialize with stored credentials
-      if (!navigator.onLine) {
+      if (!this._connectivityMonitor.getIsOnline()) {
         console.log("[KeycloakService] - Offline detected during initialization");
         if (this.initOfflineMode()) {
           callback(true);
@@ -478,20 +476,12 @@ class KeycloakService {
               HelperServices.encrypt(user.refresh_token)
             );
             
-            window.addEventListener(
-              "online",
-              async () => {
-                await this.retryTokenRefresh();
-                await KeycloakService.updateJwtToken();
-              },
-              { once: false }
-            );
           } else {
             console.info("[KeycloakService] - Init OIDC - not storing the refresh token.");
           }
 
           this.refreshToken();
-          KeycloakService.refreshJwtToken();
+          this.refreshJwtToken();
           callback(true);
         } else {
           console.warn("[KeycloakService] - Not authenticated! Initiating login...");
@@ -514,26 +504,26 @@ class KeycloakService {
       if (profile.resource_access) {
         const clientId = this._userManagerConfig?.client_id;
         if (clientId && profile.resource_access[clientId]?.roles) {
-          console.log("Found roles in resource_access for client:", clientId);
+          console.log("[KeycloakService] Found roles in resource_access for client:", clientId);
           return profile.resource_access[clientId].roles;
         }
       }
       
       // Check realm_access for realm roles
       if (profile.realm_access?.roles) {
-        console.log("Found roles in realm_access");
+        console.log("[KeycloakService] Found roles in realm_access");
         return profile.realm_access.roles;
       }
       
       // Check direct roles claim
       if (profile.role && Array.isArray(profile.role)) {
-        console.log("Found roles in direct role claim");
+        console.log("[KeycloakService] Found roles in direct role claim");
         return profile.role;
       }
       
       // Check groups as roles
       if (profile.groups && Array.isArray(profile.groups)) {
-        console.log("Found roles in groups");
+        console.log("[KeycloakService] Found roles in groups");
         return profile.groups;
       }
       
@@ -544,8 +534,8 @@ class KeycloakService {
      */
     public async userLogout(): Promise<void> {
       this.isInitialized = false; // Reset initialization state
-      this.isOfflineMode = false; // Reset offline mode
-      KeycloakService.clearPolling();
+      this.clearPolling();
+      clearInterval(this.timerId);
       StorageService.clear();
       await this.logout();
     }
@@ -574,7 +564,7 @@ class KeycloakService {
      * Check if currently running in offline mode
      */
     public isInOfflineMode(): boolean {
-      return this.isOfflineMode;
+      return this._connectivityMonitor && !this._connectivityMonitor.getIsOnline();
     }
 
     /**
@@ -589,7 +579,7 @@ class KeycloakService {
      */
     public async handleCallback(): Promise<User | null> {
       try {
-        console.log("Handling signin callback...");
+        console.log("[KeycloakService] Handling signin callback...");
         const user = await this.userManager!.signinCallback();
         if (user) {
           this.handleUserLoaded(user);
@@ -597,7 +587,7 @@ class KeycloakService {
         }
         return user;
       } catch (error) {
-        console.error("Error handling signin callback:", error);
+        console.error("[KeycloakService] Error handling signin callback:", error);
         return null;
       }
     }
@@ -607,7 +597,7 @@ class KeycloakService {
      * This is a public method that can be called when authentication is needed
      */
     public async triggerLogin(): Promise<void> {
-      console.log("Manually triggering login process");
+      console.log("[KeycloakService] Manually triggering login process");
       await this.login();
     }
 
@@ -616,7 +606,7 @@ class KeycloakService {
      * Returns true if user needs to authenticate, false if already authenticated
      */
     public needsAuthentication(): boolean {
-      return !this.isAuthenticated() && !this.isOfflineMode;
+      return !this.isAuthenticated() && !this.isInOfflineMode();
     }
   }
   

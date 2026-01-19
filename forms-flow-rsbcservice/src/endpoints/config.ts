@@ -23,3 +23,7 @@ export const KEYCLOAK_CLIENT =
   window._env_ && window._env_.REACT_APP_KEYCLOAK_CLIENT;
 
 export const FORMIO_URL = window._env_?.REACT_APP_API_PROJECT_URL;
+
+export const POOR_CONNECTION_THRESHOLD = window._env_?.REACT_APP_POOR_CONNECTION_THRESHOLD_SECONDS ?? 3; // in seconds
+
+export const UPDATE_LAST_ACTIVE_TIMER = window._env_?.REACT_APP_UPDATE_LAST_ACTIVE_TIMER_SECONDS ?? 30; // in seconds

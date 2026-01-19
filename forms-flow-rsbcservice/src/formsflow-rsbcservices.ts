@@ -6,6 +6,7 @@ import OfflineDeleteService from "./storage/dbDeleteServices";
 import RSBCImage from "./component/RSBCImage/RSBCImage";
 import BCMapSelector from "./component/BCMapSelector/BCMapSelector";
 import OfflineSubmissions from "./services/offlineSubmissions";
+import connectivityMonitor from "./services/connectivityMonitor";
 
 export {
   OfflineFetchService,
@@ -14,5 +15,6 @@ export {
   OfflineDeleteService,
   RSBCImage,
   BCMapSelector,
-  OfflineSubmissions
+  OfflineSubmissions,
+  connectivityMonitor
 };

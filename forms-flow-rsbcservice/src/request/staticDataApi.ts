@@ -5,11 +5,12 @@ import { createRequestHeader } from "./requestHeaders";
 export const fetchStaticData = async (
   resourceName: string,
   callback: any,
-  errorHandler: any
+  errorHandler: any,
+  timeout?: number
 ) => {
   const url = API.GET_STATIC_DATA.replace("<resource_name>", resourceName);
   const headers = await createRequestHeader();
-  RequestService.httpGETRequest(url, null, null, true, headers)
+  RequestService.httpGETRequestWithTimeout(url, null, null, true, headers, timeout || 30000)
     .then((res: any) => {
       if (res.data) {
         callback(res.data);

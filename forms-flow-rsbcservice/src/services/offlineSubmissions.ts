@@ -29,7 +29,11 @@ class OfflineSubmissions {
     try {
       // Access and JWT token refresh before processing the drafts and submissions
       await this.retryToken();
-      await KeycloakService.updateJwtToken();
+      await KeycloakService.getInstance(
+        KEYCLOAK_URL_AUTH,
+        KEYCLOAK_URL_REALM,
+        KEYCLOAK_CLIENT
+      ).updateJwtToken();
       
       const submissions =
         await OfflineFetchService.fetchAllNonActiveOfflineSubmissions();
