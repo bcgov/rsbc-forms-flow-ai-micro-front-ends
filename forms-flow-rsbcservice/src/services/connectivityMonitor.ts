@@ -13,8 +13,8 @@ class ConnectivityMonitor {
   private connectivityCheckIntervalId: any = null;
 
   private constructor() {
-    this.isOnline = navigator.onLine;
-    this.isConnected = this.isOnline && !this.hasPoorConnection;
+    this.isOnline = this.isConnected && !this.hasPoorConnection;
+    this.isConnected = navigator.onLine;
     this.listeners = [];
     window.addEventListener('online', this.navigatorConnectivityHandler.bind(this));
     window.addEventListener('offline', this.navigatorConnectivityHandler.bind(this));
@@ -35,7 +35,7 @@ class ConnectivityMonitor {
 
   private async checkConnectivityWithApi() {   
     try {
-      if (this.isOnline) {
+      if (this.isConnected) {
         await fetchStaticData(
           "cities",         
           (data: any) => {
@@ -60,7 +60,7 @@ class ConnectivityMonitor {
 
   private async updateLastActive() {   
     try {
-      if (this.isConnected) {
+      if (this.isOnline) {
         await updateUserLastActiveApi(
           DBServiceHelper.getUserGuid(),
           POOR_CONNECTION_THRESHOLD * 1000,
@@ -78,25 +78,25 @@ class ConnectivityMonitor {
   }
 
   private updateStatus() {
-    if (this.isConnected == this.isOnline && !this.hasPoorConnection) {
+    if (this.isOnline == this.isConnected && !this.hasPoorConnection) {
       return; // No change in status
     }
-    this.isConnected = this.isOnline && !this.hasPoorConnection;
+    this.isOnline = this.isConnected && !this.hasPoorConnection;
     this.notifyListeners();
   }
 
   private navigatorConnectivityHandler() {
-    this.isOnline = navigator.onLine;
+    this.isConnected = navigator.onLine;
     this.updateStatus();
   }
 
   private notifyListeners() {
-    console.log(`[ConnectivityMonitor] status changed: ${this.isConnected ? 'online' : 'offline'}`);
-    this.listeners.forEach(listener => listener(this.isConnected));
+    console.log(`[ConnectivityMonitor] status changed: ${this.isOnline ? 'online' : 'offline'}`);
+    this.listeners.forEach(listener => listener(this.isOnline));
   }
 
   public getIsOnline(): boolean {
-    return this.isConnected;
+    return this.isOnline;
   }
 
   public subscribe(listener: (status: boolean) => void) {
