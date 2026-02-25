@@ -28,6 +28,30 @@ class RequestService {
         : headers,
     });
   }
+ 
+  public static httpGETRequestWithTimeout(
+    url: string,
+    data: object | null,
+    token: string | null,
+    isBearer: boolean = true,
+    headers: object | null = null,
+    timeout: number | null = 30000
+  ): any {
+    return axios.get(url, {
+      params: data,
+      headers: !headers
+        ? {
+            Authorization: isBearer
+              ? `Bearer ${
+                  token || StorageService.get(StorageService.User.AUTH_TOKEN)
+                }`
+              : token,
+          }
+        : headers,
+      timeout: timeout,
+    });
+  }
+
   public static httpGETBlobRequest(
     url: string,
     data: object | null,
@@ -138,6 +162,28 @@ class RequestService {
       },
     });
   }
+
+  public static httpPOSTRequestWithTimeout(
+    url: string,
+    data: object,
+    token: string | null,
+    isBearer: boolean = true,
+    headers: object | null = null,
+    timeout: number = 5000
+  ): any {
+    return axios.post(url, data, {
+      headers: {
+            ...headers,
+            Authorization: isBearer
+              ? `Bearer ${
+                  token || StorageService.get(StorageService.User.AUTH_TOKEN)
+                }`
+              : token,
+          },
+      timeout: timeout,
+    });
+  }
+
   public static httpPUTRequest(
     url: string,
     data: object,
