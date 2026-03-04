@@ -256,7 +256,7 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
           <img
             width="160"
             height="auto"
-            src={APP_BASE_ROUTE + "/RoadsafteyLogo.png"}
+            src={APP_BASE_ROUTE + "/DigitalFormsLogo.png"}
             alt="applicationName"
           />
         ) : (
