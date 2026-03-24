@@ -1,5 +1,5 @@
 import React, { JSX } from "react";
-import { formsPNG } from "../helpers/helperServices";
+import { formsPNGVersions } from "../helpers/helperServices";
 import { SVGprint } from "./svgPrint";
 import { OfflineFetchService } from "../formsflow-rsbcservices";
 
@@ -93,17 +93,19 @@ class PrintServices {
     isForSubmissionPayload: boolean
   ): JSX.Element[] {
     const components: JSX.Element[] = [];
+    const formVersion = values["form_version"] || "version1";
 
-    for (const formKey in formsPNG?.[renderStage]?.[item] || {}) {
+    for (const formKey in formsPNGVersions?.[formVersion]?.[renderStage]?.[item] || {}) {
       if (this.shouldSkipComponent(formKey, item, values)) continue;
       components.push(
         React.createElement(SVGprint, {
           key: `${item}-${formKey}`,
-          form: formsPNG?.[renderStage]?.[item]?.[formKey]?.["png"] || "",
+          form: formsPNGVersions?.[formVersion]?.[renderStage]?.[item]?.[formKey]?.["png"] || "",
           formAspect:
-            formsPNG?.[renderStage]?.[item]?.[formKey]?.["aspectClass"] || "",
+            formsPNGVersions?.[formVersion]?.[renderStage]?.[item]?.[formKey]?.["aspectClass"] || "",
           formLayout: item,
           formType: formKey,
+          formVersion: values["form_version"] || "version1",
           values: values,
           impoundLotOperators: impoundLotOperators,
           renderStage: renderStage,

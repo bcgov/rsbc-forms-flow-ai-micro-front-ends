@@ -8,6 +8,9 @@ import appealsForm from "../assets/MV2721_20250630_appeal.png";
 import viReportForm from "../assets/MV2722_20250630.png";
 import twelveHourDriverForm from "../assets/MV2906E_082023_driver.png";
 import twelveHourICBCForm from "../assets/MV2906E_082023_icbc.png";
+import twentyFourHourDriverformVersion2 from "../assets/MV2634_012026_driver.png";
+import twentyFourHourILOformVersion2 from "../assets/MV2634_012026_ilo.png";
+import twentyFourHourPoliceformVersion2 from "../assets/MV2634_012026_icbc.png";
 
 interface FormEntry {
   png: string;
@@ -39,7 +42,12 @@ interface FormsPNG {
   stageTwo: Stage;
 }
 
-export const formsPNG: FormsPNG = {
+interface FormsPNGVersions {
+  version1: FormsPNG;
+  version2: FormsPNG;
+}
+
+const formsPNGVersion1: FormsPNG = {
   stageOne: {
     TwentyFourHour: {
       DRIVER: { png: twentyFourHourDriverform, aspectClass: "--landscape" },
@@ -67,6 +75,41 @@ export const formsPNG: FormsPNG = {
       DETAILS: { png: viIncidentDetails, aspectClass: "--portrait" },
     },
   },
+};
+
+const formsPNGVersion2: FormsPNG = {
+  stageOne: {
+    TwentyFourHour: {
+      DRIVER: { png: twentyFourHourDriverformVersion2, aspectClass: "--landscape" },
+      ILO: { png: twentyFourHourILOformVersion2, aspectClass: "--landscape" },
+    },
+    TwelveHour: {
+      DRIVER: { png: twelveHourDriverForm, aspectClass: "--landscape" },
+    },
+    VI: {
+      DRIVER: { png: viDriverForm, aspectClass: "--portrait" },
+      APPEAL: { png: appealsForm, aspectClass: "--portrait" },
+      ILO: { png: viDriverForm, aspectClass: "--portrait" },
+    },
+  },
+  stageTwo: {
+    TwentyFourHour: {
+      POLICE: { png: twentyFourHourPoliceformVersion2, aspectClass: "--landscape" },
+    },
+    TwelveHour: {
+      POLICE: { png: twelveHourICBCForm, aspectClass: "--landscape" },
+    },
+    VI: {
+      POLICE: { png: viDriverForm, aspectClass: "--portrait" },
+      REPORT: { png: viReportForm, aspectClass: "--portrait" },
+      DETAILS: { png: viIncidentDetails, aspectClass: "--portrait" },
+    },
+  },
+};
+
+export const formsPNGVersions: FormsPNGVersions = {
+  version1: formsPNGVersion1,
+  version2: formsPNGVersion2,
 };
 
 interface FieldsToSplit {

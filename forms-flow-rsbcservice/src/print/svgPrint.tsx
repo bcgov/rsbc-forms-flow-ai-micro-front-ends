@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { printFormatHelper, printCheckHelper } from "../helpers/helperServices";
-import formFieldLayout from "./print_layout.json";
 import "./svgPrint.scss";
+import formFieldLayoutVersion1 from "./version1/print_layout.json";
+import formFieldLayoutVersion2 from "./version2/print_layout.json";
+
+const formFieldLayouts = {
+  version1:  formFieldLayoutVersion1,
+  version2: formFieldLayoutVersion2,
+};
 
 interface SVGPrintProps {
   form: string;
   formAspect: string;
   formLayout: string;
   formType: string;
+  formVersion: string;
   values: Record<string, any>;
   impoundLotOperators: any;
   renderStage: string;
@@ -21,6 +28,7 @@ export const SVGprint: React.FC<SVGPrintProps> = ({
   formAspect,
   formLayout,
   formType,
+  formVersion,
   values,
   impoundLotOperators,
   renderStage,
@@ -28,9 +36,9 @@ export const SVGprint: React.FC<SVGPrintProps> = ({
   isForSubmissionPayload,
 }) => {
   const [imageData, setImageData] = useState<string | null>(null);
-  const formFields = formFieldLayout[formLayout]?.[formType];
-  const allFormFields = formFieldLayout[formLayout]?.["fields"];
-  const viewBox = formFieldLayout[formLayout]?.["viewbox"];
+  const formFields = formFieldLayouts[formVersion]?.[formLayout]?.[formType];
+  const allFormFields = formFieldLayouts[formVersion]?.[formLayout]?.["fields"];
+  const viewBox = formFieldLayouts[formVersion]?.[formLayout]?.["viewbox"];
 
   let svgStyle: React.CSSProperties = {};
 
