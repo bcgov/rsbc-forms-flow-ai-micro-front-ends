@@ -2711,7 +2711,7 @@
       },
       "ECOS_NOTICE_DAY": {
         "field_type": "text",
-        "field_name": "date_of_driving",
+        "field_name": "confirmation_of_service_date",
         "date_val": "Do",
         "classNames": "fontXSmall",
         "start": {
@@ -2721,7 +2721,7 @@
       },
       "ECOS_NOTICE_MONTH": {
         "field_type": "text",
-        "field_name": "date_of_driving",
+        "field_name": "confirmation_of_service_date",
         "date_val": "MM /",
         "classNames": "fontXSmall",
         "start": {
@@ -2731,7 +2731,7 @@
       },
       "ECOS_NOTICE_YEAR": {
         "field_type": "text",
-        "field_name": "date_of_driving",
+        "field_name": "confirmation_of_service_date",
         "date_val": "YYYY",
         "classNames": "fontXSmall",
         "start": {
