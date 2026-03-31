@@ -2786,7 +2786,7 @@
       },
       "ECOS_DATE_CERTIFIED": {
         "field_type": "text",
-        "field_name": "date_of_driving",
+        "field_name": "confirmation_of_service_date",
         "date_val": "YYYY-MM-DD",
         "classNames": "fontSmall",
         "start": {
