@@ -2816,5 +2816,242 @@
       }
     },
     "viewbox": "0 0 223 210"
+  },
+  "IRP": {
+    "fields": {
+      "BAR_CODE": {
+        "field_type": "text",
+        "barcode": true,
+        "field_name": "IRP_number",
+        "classNames": "fontBarcode",
+        "start": {
+          "x": 137,
+          "y": 20
+        }
+      },
+      "IRP_NUMBER": {
+        "field_type": "text",
+        "field_name": "IRP_number",
+        "classNames": "fontMedium",
+        "start": {
+          "x": 152,
+          "y": 26
+        }
+      },
+      "DRIVER_NAME": {
+        "field_type": "text",
+        "field_name": ["driver_last_name", "driver_given_name"],
+        "classNames": "fontSmall",
+        "start": {
+          "x": 53,
+          "y": 35.7
+        }
+      },
+      "DRIVER_DOB": {
+        "field_type": "text",
+        "field_name": "driver_dob",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 143,
+          "y": 35.7
+        }
+      },
+      "DRIVER_GENDER": {
+        "field_type": "text",
+        "field_name": "gender",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 169,
+          "y": 35.7
+        }
+      },
+      "DRIVER_ADDRESS": {
+        "field_type": "text",
+        "field_name": [
+          "driver_address",
+          "driver_city"
+        ],
+        "classNames": "fontSmall",
+        "start": {
+          "x": 53,
+          "y": 42.2
+        }
+      },
+      "DRIVER_PROVINCE": {
+        "field_type": "text",
+        "field_name": "driver_prov_state",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 140,
+          "y": 42.2
+        }
+      },
+      "DRIVER_POSTAL_CODE": {
+        "field_type": "text",
+        "field_name": "driver_postal",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 153,
+          "y": 42.2
+        }
+      },
+      "DRIVER_DL_NUMBER": {
+        "field_type": "text",
+        "field_name": "driver_licence_no_irp",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 53,
+          "y": 48.5
+        }
+      },
+      "DRIVER_DL_CLASS": {
+        "field_type": "text",
+        "field_name": "driver_licence_class",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 85,
+          "y": 48.5
+        }
+      },
+      "DRIVER_DL_EXPIRY": {
+        "field_type": "text",
+        "field_name": "driver_licence_expiry",
+        "date_val": "YYYY",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 97,
+          "y": 48.5
+        }
+      },
+      "OUT_OF_PROVINCE_DL_NUMBER": {
+        "field_type": "text",
+        "field_name": "out_of_province_DL",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 115,
+          "y": 48.5
+        }
+      },      
+      "DRIVER_DL_PROVINCE": {
+        "field_type": "text",
+        "field_name": "drivers_licence_jurisdiction",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 163,
+          "y": 48.5
+        }
+      },
+      "SEIZED_DL": {
+        "field_type": "checkbox",
+        "field_name": "seized_DL",
+        "field_val": "YES",
+        "classNames": "fontText",
+        "start": {
+          "x": 56,
+          "y": 55
+        }
+      },
+      "NOT_SEIZED_DL": {
+        "field_type": "checkbox",
+        "field_name": "seized_DL",
+        "field_val": "NO",
+        "classNames": "fontText",
+        "start": {
+          "x": 70,
+          "y": 55
+        }
+      },
+      "IMPOUNDED": {
+        "field_type": "checkbox",
+        "field_name": "VI",
+        "field_val": "true",
+        "classNames": "fontText",
+        "start": {
+          "x": 92.5,
+          "y": 55
+        }
+      },      
+      "NOT_IMPOUNDED": {
+        "field_type": "checkbox",
+        "field_name": "VI",
+        "field_val": "false",
+        "classNames": "fontText",
+        "start": {
+          "x": 121,
+          "y": 55
+        }
+      },
+      "VI_NUMBER": {
+        "field_type": "text",
+        "field_name": "VI_number",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 140,
+          "y": 55
+        }
+      },
+      "NOTICE_DATE": {
+        "field_type": "text",
+        "field_name": "date_of_driving",
+        "date_val": "YYYY MM DD",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 120,
+          "y": 61
+        }
+      },
+      "NOTICE_TIME": {
+        "field_type": "text",
+        "field_name": "time_of_driving",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 49,
+          "y": 66
+        }
+      },
+      "LOCATION": {
+        "field_type": "text",
+        "field_name": "intersection_or_address_of_offence",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 67,
+          "y": 66
+        }
+      },
+      "LOCATION_CITY": {
+        "field_type": "text",
+        "field_name": "offence_city",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 120,
+          "y": 66
+        }
+      }
+    },
+    "DRIVER": [
+      "BAR_CODE",
+      "IRP_NUMBER",
+      "DRIVER_NAME",
+      "DRIVER_DOB",
+      "DRIVER_GENDER",
+      "DRIVER_ADDRESS",
+      "DRIVER_PROVINCE",
+      "DRIVER_POSTAL_CODE",
+      "DRIVER_DL_NUMBER",
+      "DRIVER_DL_CLASS",
+      "OUT_OF_PROVINCE_DL_NUMBER",
+      "DRIVER_DL_PROVINCE",
+      "DRIVER_DL_EXPIRY",
+      "SEIZED_DL",
+      "NOT_SEIZED_DL",
+      "IMPOUNDED",
+      "NOT_IMPOUNDED",
+      "VI_NUMBER",
+      "NOTICE_DATE",
+      "NOTICE_TIME",
+      "LOCATION",
+      "LOCATION_CITY"
+    ],
+    "viewbox": "0 0 210 210"
   }
 }
