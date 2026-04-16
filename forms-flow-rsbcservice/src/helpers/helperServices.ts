@@ -11,6 +11,7 @@ import twelveHourICBCForm from "../assets/MV2906E_082023_icbc.png";
 import twentyFourHourDriverformVersion2 from "../assets/MV2634_012026_driver.png";
 import twentyFourHourILOformVersion2 from "../assets/MV2634_012026_ilo.png";
 import twentyFourHourPoliceformVersion2 from "../assets/MV2634_012026_icbc.png";
+import irpForm from "../assets/MV2723_0216.png";
 
 interface FormEntry {
   png: string;
@@ -34,6 +35,10 @@ interface Stage {
     POLICE?: FormEntry;
     REPORT?: FormEntry;
     DETAILS?: FormEntry;
+  };
+  IRP?: {
+    DRIVER?: FormEntry;
+    POLICE?: FormEntry;
   };
 }
 
@@ -91,6 +96,9 @@ const formsPNGVersion2: FormsPNG = {
       APPEAL: { png: appealsForm, aspectClass: "--portrait" },
       ILO: { png: viDriverForm, aspectClass: "--portrait" },
     },
+    IRP: {
+      DRIVER: { png: irpForm, aspectClass: "--portrait" },
+    },
   },
   stageTwo: {
     TwentyFourHour: {
@@ -103,6 +111,9 @@ const formsPNGVersion2: FormsPNG = {
       POLICE: { png: viDriverForm, aspectClass: "--portrait" },
       REPORT: { png: viReportForm, aspectClass: "--portrait" },
       DETAILS: { png: viIncidentDetails, aspectClass: "--portrait" },
+    },
+    IRP: {
+      POLICE: { png: irpForm, aspectClass: "--portrait" },
     },
   },
 };
