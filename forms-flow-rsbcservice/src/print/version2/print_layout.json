@@ -2850,6 +2850,7 @@
       "DRIVER_DOB": {
         "field_type": "text",
         "field_name": "driver_dob",
+        "date_val": "YYYY MM DD",
         "classNames": "fontSmall",
         "start": {
           "x": 143,
@@ -3012,7 +3013,7 @@
       "LOCATION": {
         "field_type": "text",
         "field_name": "intersection_or_address_of_offence",
-        "classNames": "fontSmall",
+        "classNames": "fontXSmall",
         "start": {
           "x": 67,
           "y": 66
@@ -3025,6 +3026,167 @@
         "start": {
           "x": 120,
           "y": 66
+        }
+      },
+      "IRP_DURARION_3_DAYS": {
+        "field_type": "checkbox",
+        "field_name": "irp_impound_duration",
+        "field_val": "BACWARN3",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 47.5,
+          "y": 79.7
+        }
+      },
+      "IRP_DURARION_7_DAYS": {
+        "field_type": "checkbox",
+        "field_name": "irp_impound_duration",
+        "field_val": "BACWARN7",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 47.5,
+          "y": 86.3
+        }
+      },
+      "IRP_DURARION_30_DAYS": {
+        "field_type": "checkbox",
+        "field_name": "irp_impound_duration",
+        "field_val": "BACWARN30",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 47.5,
+          "y": 92.4
+        }
+      },
+      "IRP_DURARION_90_DAYS_FAIL": {
+        "field_type": "checkbox",
+        "field_name": "irp_impound_duration",
+        "field_val": "BACFAIL",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 47.5,
+          "y": 98.6
+        }
+      },
+      "IRP_DURARION_90_DAYS_REFUSE": {
+        "field_type": "checkbox",
+        "field_name": "irp_impound_duration",
+        "field_val": "BACREFUSAL",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 47.5,
+          "y": 104.9
+        }
+      },
+      "OFFICER_NAME": {
+        "field_type": "text",
+        "field_name": "officer-lastname",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 47,
+          "y": 112.5
+        }
+      },
+      "OFFICER_SIGNATURE": {
+        "field_type": "text",
+        "field_name": "officer-lastname",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 87.5,
+          "y": 112.5
+        }
+      },
+      "OFFICER_BADGE_NUMBER": {
+        "field_type": "text",
+        "field_name": "officer-prime-id",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 144.5,
+          "y": 112.5
+        }
+      },
+      "AGENCY_NAME": {
+        "field_type": "text",
+        "field_name": "officer-agency",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 47,
+          "y": 117
+        }
+      },
+      "AGENCY_FILE_NUMBER": {
+        "field_type": "text",
+        "field_name": "agency_file_no",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 122,
+          "y": 117
+        }
+      },
+      "ECOS_OFFICER_NAME": {
+        "field_type": "text",
+        "field_name": "officer-lastname",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 48.7,
+          "y": 159
+        }
+      },
+      "ECOS_NOTICE_DATE": {
+        "field_type": "text",
+        "field_name": "confirmation_of_service_date",
+        "date_val": "YYYY MM DD",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 137,
+          "y": 160.5
+        }
+      },
+      "ECOS_DRIVER_NAME": {
+        "field_type": "text",
+        "field_name": ["driver_last_name", "driver_given_name"],
+        "classNames": "fontSmall",
+        "start": {
+          "x": 63,
+          "y": 164
+        }
+      },
+      "ECOS_DATE_CERTIFIED": {
+        "field_type": "text",
+        "field_name": "confirmation_of_service_date",
+        "date_val": "YYYY MM DD",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 57.5,
+          "y": 171.3
+        }
+      },
+      "ECOS_OFFICER_SIGNATURE": {
+        "field_type": "text",
+        "field_name": "officer-lastname",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 111,
+          "y": 170
+        }
+      },
+      "ECOS_OFFICER_BADGE_NUMBER": {
+        "field_type": "text",
+        "field_name": "officer-prime-id",
+        "classNames": "fontSmall",
+        "start": {
+          "x": 158.5,
+          "y": 170
+        }
+      },
+      "DRIVER_COPY": {
+        "field_type": "always",
+        "field_name": "",
+        "field_value": "Driver Copy",
+        "classNames": "fontXSmall",
+        "start": {
+          "x": 102.5,
+          "y": 175
         }
       }
     },
@@ -3050,7 +3212,24 @@
       "NOTICE_DATE",
       "NOTICE_TIME",
       "LOCATION",
-      "LOCATION_CITY"
+      "LOCATION_CITY",
+      "IRP_DURARION_3_DAYS",
+      "IRP_DURARION_7_DAYS",
+      "IRP_DURARION_30_DAYS",
+      "IRP_DURARION_90_DAYS_FAIL",
+      "IRP_DURARION_90_DAYS_REFUSE",
+      "OFFICER_NAME",
+      "OFFICER_SIGNATURE",
+      "OFFICER_BADGE_NUMBER",
+      "AGENCY_NAME",
+      "AGENCY_FILE_NUMBER",
+      "ECOS_OFFICER_NAME",
+      "ECOS_NOTICE_DATE",
+      "ECOS_DRIVER_NAME",
+      "ECOS_DATE_CERTIFIED",
+      "ECOS_OFFICER_SIGNATURE",
+      "ECOS_OFFICER_BADGE_NUMBER",
+      "DRIVER_COPY"
     ],
     "viewbox": "0 0 210 210"
   }
