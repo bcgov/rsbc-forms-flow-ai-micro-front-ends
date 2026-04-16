@@ -3188,6 +3188,16 @@
           "x": 102.5,
           "y": 175
         }
+      },
+      "POLICE_COPY": {
+        "field_type": "always",
+        "field_name": "",
+        "field_value": "RoadSafetyBC/Police Copy",
+        "classNames": "fontXSmall",
+        "start": {
+          "x": 92.5,
+          "y": 175
+        }
       }
     },
     "DRIVER": [
@@ -3231,6 +3241,47 @@
       "ECOS_OFFICER_BADGE_NUMBER",
       "DRIVER_COPY"
     ],
+    "POLICE": [
+      "BAR_CODE",
+      "IRP_NUMBER",
+      "DRIVER_NAME",
+      "DRIVER_DOB",
+      "DRIVER_GENDER",
+      "DRIVER_ADDRESS",
+      "DRIVER_PROVINCE",
+      "DRIVER_POSTAL_CODE",
+      "DRIVER_DL_NUMBER",
+      "DRIVER_DL_CLASS",
+      "OUT_OF_PROVINCE_DL_NUMBER",
+      "DRIVER_DL_PROVINCE",
+      "DRIVER_DL_EXPIRY",
+      "SEIZED_DL",
+      "NOT_SEIZED_DL",
+      "IMPOUNDED",
+      "NOT_IMPOUNDED",
+      "VI_NUMBER",
+      "NOTICE_DATE",
+      "NOTICE_TIME",
+      "LOCATION",
+      "LOCATION_CITY",
+      "IRP_DURARION_3_DAYS",
+      "IRP_DURARION_7_DAYS",
+      "IRP_DURARION_30_DAYS",
+      "IRP_DURARION_90_DAYS_FAIL",
+      "IRP_DURARION_90_DAYS_REFUSE",
+      "OFFICER_NAME",
+      "OFFICER_SIGNATURE",
+      "OFFICER_BADGE_NUMBER",
+      "AGENCY_NAME",
+      "AGENCY_FILE_NUMBER",
+      "ECOS_OFFICER_NAME",
+      "ECOS_NOTICE_DATE",
+      "ECOS_DRIVER_NAME",
+      "ECOS_DATE_CERTIFIED",
+      "ECOS_OFFICER_SIGNATURE",
+      "ECOS_OFFICER_BADGE_NUMBER",
+      "POLICE_COPY"
+    ],    
     "viewbox": "0 0 210 210"
   }
 }
