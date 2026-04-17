@@ -49,7 +49,8 @@ class PrintServices {
         valuesCopy["VI_number"] = null;
       }
       valuesCopy["driver_licence_no_irp"] = values["driver_licence_no"];
-      if (values["drivers_licence_jurisdiction"] !== "BC") {
+      if (values["drivers_licence_jurisdiction"] && 
+          values["drivers_licence_jurisdiction"].value !== "CA_BC") {
         valuesCopy["driver_licence_no_irp"] = null;
         valuesCopy["out_of_province_DL"] = values["driver_licence_no"];
       }

@@ -21,7 +21,7 @@ export const sampleData: Record<string, any> = {
 
   // Driver information
   driver_licence_no: "334324",
-  drivers_licence_jurisdiction: "BC",
+  drivers_licence_jurisdiction: {value: 'CA_BC', label: 'BRITISH COLUMBIA'},
   driver_last_name: "DOE",
   driver_given_name: "JOHN",
   driver_address: "1934 WESTPARK LN",
