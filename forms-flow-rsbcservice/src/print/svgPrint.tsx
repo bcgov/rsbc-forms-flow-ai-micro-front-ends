@@ -81,7 +81,7 @@ export const SVGprint: React.FC<SVGPrintProps> = ({
           marginTop: "28px",
           marginBottom: "0px",
         };
-      } else if (formLayout === "VI" || formLayout === "IRP") {
+      } else if (formLayout === "VI") {
         svgStyle = isPreview
           ? {
               marginLeft: "0px",
@@ -91,6 +91,20 @@ export const SVGprint: React.FC<SVGPrintProps> = ({
             }
           : {
               marginLeft: "-430px",
+              marginRight: "-280px",
+              marginTop: "50px",
+              marginBottom: "40px",
+            };
+      } else if (formLayout === "IRP") {
+        svgStyle = isPreview
+          ? {
+              marginLeft: "0px",
+              marginRight: "0px",
+              marginTop: "50px",
+              marginBottom: "40px",
+            }
+          : {
+              marginLeft: "-480px",
               marginRight: "-280px",
               marginTop: "50px",
               marginBottom: "40px",
