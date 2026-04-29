@@ -198,6 +198,32 @@
   }
 }
 
+.accordion-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacer-100);
+  width: 100%;
+}
+
+.accordion-header-badge {
+  min-width: 1.5rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  background-color: var(--ff-danger);
+  color: var(--ff-white);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-lg);
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.accordion-button:not(.collapsed) .accordion-header-badge,
+.active-header .accordion-header-badge {
+  background-color: var(--ff-danger);
+  color: var(--ff-white);
+}
+
 .multitenancy-header {
   height: var(--client-nav);
   box-shadow: var(--shadow-lg);

@@ -75,6 +75,7 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
   const showApplications = setShowApplications(userDetail?.groups);
   const [activeKey,setActiveKey] = useState(0);
   const FEEDBACK_ROUTE = "feedback";
+  const [reviewTaskCount, setReviewTaskCount] = useState(0);
 
   const getInitials = (name) => {
     if (!name) return "";
@@ -126,6 +127,11 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
     props.subscribe("ES_FORM", (msg, data) => {
       if (data) {
         setForm(data);
+      }
+    });
+    props.subscribe("ES_TASK_COUNT", (msg, data) => {
+      if (data && data.tasksCount !== reviewTaskCount) {
+        setReviewTaskCount(data.tasksCount);
       }
     });
   }, []);
@@ -342,6 +348,7 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
                 eventKey={SectionKeys.REVIEW.value}
                 optionsCount="1"
                 mainMenu="Review"
+                badgeCount={reviewTaskCount}
                 subMenu={[
                   {
                     name: "Tasks",
