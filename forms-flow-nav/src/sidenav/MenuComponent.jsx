@@ -13,6 +13,7 @@ const MenuComponent = ({
   mainMenu,
   subMenu,
   optionsCount,
+  badgeCount,
   subscribe,
   baseUrl
 }) => {
@@ -94,7 +95,18 @@ const MenuComponent = ({
             )}
           />
         )}
-        <span>{t(mainMenu)}</span>
+        <span className="accordion-header-content">
+          <span>{t(mainMenu)}</span>
+          {badgeCount > 0 && (
+            <span
+              className="accordion-header-badge"
+              data-testid={`accordion-header-badge-${eventKey}`}
+              aria-label={`${badgeCount} assigned tasks`}
+            >
+              {badgeCount}
+            </span>
+          )}
+        </span>
       </Accordion.Header>
       {!noOptionsMenu && (
         <Accordion.Body>
@@ -132,6 +144,7 @@ MenuComponent.propTypes = {
     })
   ).isRequired,
   optionsCount: PropTypes.string.isRequired,
+  badgeCount: PropTypes.number,
   subscribe: PropTypes.func.isRequired,
   baseUrl: PropTypes.string.isRequired,
 };
