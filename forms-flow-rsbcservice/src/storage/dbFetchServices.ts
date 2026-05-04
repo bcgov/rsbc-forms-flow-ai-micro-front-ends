@@ -252,7 +252,7 @@ class OfflineFetchService {
 
   /**
    * Returns the unleased form IDs for a given form type.
-   * @param formType - "12Hour", "24Hour", "VI", "MV6020"
+   * @param formType - "12Hour", "24Hour", "VI", "MV6020", "IRP"
    */
   public static async getAvailableFormIds(formType: string): Promise<any[]> {
     try {
@@ -277,7 +277,7 @@ class OfflineFetchService {
 
   /**
    * Fetches the form availability data from the "formID" table in IndexedDB.
-   * @param formType - "12Hour", "24Hour", "VI", "MV6020"
+   * @param formType - "12Hour", "24Hour", "VI", "MV6020", "IRP"
    */
   public static async getNextAvailableFormId(
     formType: string

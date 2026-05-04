@@ -16,6 +16,7 @@ import { getUserRoles } from "../request/getUserRolesApi";
 import {
   REACT_APP_FORM_ID_12HOUR_LIMIT,
   REACT_APP_FORM_ID_24HOUR_LIMIT,
+  REACT_APP_FORM_ID_IRP_LIMIT,
   REACT_APP_FORM_ID_MV6020_LIMIT,
   REACT_APP_FORM_ID_VI_LIMIT,
 } from "./config";
@@ -239,12 +240,17 @@ class OfflineSaveService {
         0,
         REACT_APP_FORM_ID_MV6020_LIMIT - (countByFormType["MV6020"] || 0)
       );
+      const requiredIRP = Math.max(
+        0,
+        REACT_APP_FORM_ID_IRP_LIMIT - (countByFormType["IRP"] || 0)
+      );
       try {
         const requiredIds = {
           "12Hour": required12Hour,
           "24Hour": required24Hour,
           "VI": requiredVI,
           "MV6020": requiredMV6020,
+          "IRP": requiredIRP,
         };
 
         await fetchFormIDs(
