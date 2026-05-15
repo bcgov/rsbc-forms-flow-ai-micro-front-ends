@@ -2023,7 +2023,7 @@
       "REPORT_INCIDENT_DETAILS": {
         "field_type": "textArea",
         "field_name": "incident_details",
-        "classNames": "fontXXSmall textArea",
+        "classNames": "fontXXSmall textArea uppercase",
         "start": {
           "x": 53,
           "y": 144
@@ -2032,7 +2032,7 @@
       "DETAILS_INCIDENT_DETAILS": {
         "field_type": "textArea",
         "field_name": "incident_details",
-        "classNames": "fontXXSmall textArea",
+        "classNames": "fontXXSmall textArea uppercase",
         "start": {
           "x": 53,
           "y": 30
