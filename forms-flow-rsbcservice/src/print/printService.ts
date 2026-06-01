@@ -44,6 +44,17 @@ class PrintServices {
       valuesCopy["date_released"] = null;
       valuesCopy["time_released"] = null;
     }
+    if (values["IRP"]) {
+      if (!values["VI"]) {
+        valuesCopy["VI_number"] = null;
+      }
+      valuesCopy["driver_licence_no_irp"] = values["driver_licence_no"];
+      if (values["drivers_licence_jurisdiction"] && 
+          values["drivers_licence_jurisdiction"].value !== "CA_BC") {
+        valuesCopy["driver_licence_no_irp"] = null;
+        valuesCopy["out_of_province_DL"] = values["driver_licence_no"];
+      }
+    }
     return valuesCopy;
   }
 
@@ -58,6 +69,7 @@ class PrintServices {
       TwentyFourHour: values["TwentyFourHour"],
       TwelveHour: values["TwelveHour"],
       VI: values["VI"],
+      IRP: values["IRP"],
     };
 
     const componentsToRender: JSX.Element[] = [];

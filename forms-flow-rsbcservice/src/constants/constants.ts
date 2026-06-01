@@ -37,7 +37,7 @@ export const StaticResources = [
     "tarPoliceAgencies"
   ];
 
-  export const FormTypes = ["12Hour", "24Hour", "VI", "MV6020"];
+  export const FormTypes = ["12Hour", "24Hour", "VI", "MV6020", "IRP"];
 
   export const TableMetadataMapping = Object.freeze({
     formList: { metadataTable: "formListMetaData", dataKey: "forms" },
