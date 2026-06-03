@@ -132,7 +132,7 @@ export default function App() {
     JSON.stringify(sampleComponentSettings.rsbcImageSettings, null, 2)
   );
   const [stage, setStage] = useState<string>(
-    sampleComponentSettings.stage ?? "stageOne"
+    sampleComponentSettings.stage ?? "rts"
   );
   const [builderMode, setBuilderMode] = useState(false);
 
@@ -239,6 +239,7 @@ export default function App() {
             >
               <option value="stageOne">Stage One</option>
               <option value="stageTwo">Stage Two</option>
+              <option value="rts">RTS</option>
             </select>
           </div>
 
