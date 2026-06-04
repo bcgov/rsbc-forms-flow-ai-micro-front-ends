@@ -23,12 +23,15 @@ import {
 } from '../src/helpers/helperServices';
 
 describe('helperServices', () => {
-  test('formsPNGVersions exposes both supported versions', () => {
+  test('formsPNGVersions exposes both supported versions and RTS mappings', () => {
     expect(Object.keys(formsPNGVersions)).toEqual(['version1', 'version2']);
     expect(formsPNGVersions.version1.stageOne.TwentyFourHour.DRIVER.png).toBe(
       'mock-24-driver.png'
     );
     expect(formsPNGVersions.version2.stageOne.IRP.DRIVER.png).toBe('mock-irp.png');
+    expect(formsPNGVersions.version2.stageOne.IRP.DRIVER_BACK.png).toBe('mock-irp-back.png');
+    expect(formsPNGVersions.version2.rts.IRP.RTS.png).toBe('mock-rts.png');
+    expect(formsPNGVersions.version2.rts.IRP.RTS_BACK.png).toBe('mock-rts-back.png');
   });
 
   test('handleError logs prefixed error message', () => {
@@ -219,5 +222,23 @@ describe('helperServices', () => {
     expect(
       printCheckHelper({ release_type: 'roadside' }, { field_name: 'release_type', field_val: 'roadside' }, 'X')
     ).toBe(true);
+  });
+
+  test('printCheckHelper supports object-key lookups for nested toggle maps', () => {
+    expect(
+      printCheckHelper(
+        { selected_forms: { RTS: true, DRIVER: false } },
+        { field_name: 'selected_forms', field_val: 'RTS' },
+        'X'
+      )
+    ).toBe(true);
+
+    expect(
+      printCheckHelper(
+        { selected_forms: { RTS: true, DRIVER: false } },
+        { field_name: 'selected_forms', field_val: 'DRIVER' },
+        'X'
+      )
+    ).toBe(false);
   });
 });
