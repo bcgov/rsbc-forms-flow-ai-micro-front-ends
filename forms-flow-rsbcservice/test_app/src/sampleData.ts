@@ -51,6 +51,7 @@ export const sampleData: Record<string, any> = {
   "officer-lastname": "SMITH",
   "officer-prime-id": "VI3833",
   "officer-agency": "VICTORIA POLICE DEPARTMENT",
+  peace_officer_name: "SMITH, OFFICER",
   agency_file_no: "VPD-2025-0001",
   date_of_driving: "2025-04-14",
   time_of_driving: "14:30",
@@ -65,6 +66,38 @@ export const sampleData: Record<string, any> = {
   // IRP-specific fields
   seized_DL: "NO",
   irp_impound_duration: "BACREFUSAL",
+  time_suspicion_formed: "14:35",
+  time_ASD_demand: "14:40",
+  driver_refuse_breath_sample: "NO",
+  time_breath_sample_refusal: "14:45",
+  irp_reason_grounds: {
+      witnessedByOfficer: true,
+      admissionByDriver: true,
+      independentWitness: true,
+      other: true
+  },
+  "irp_asd_identification_1st_test": "alco-sensor",
+  "irp_serial_1st_test": "test",
+  "irp_time_1st_test": "09:12",
+  "irp_result_shown_driver_1st_test": "NO",
+  "irp_result_1st_test": "FAIL",
+  "irp_right_2nd_test": "YES",
+  "irp_right_different_asd": "YES",
+  "irp_lower_test_prevail": "YES",
+  "irp_driver_request_2nd_test": "YES",
+  "irp_asd_identification_2nd_test": "alcotest-6000",
+  "irp_serial_2nd_test": "3345777",
+  "irp_time_2nd_test": "09:22",
+  "irp_result_shown_driver_2nd_test": "NO",
+  "irp_result_2nd_test": "WITHDRAWN", //WITHDRAWN
+  "grounds_for_reasonable_suspicion": {
+    "odorOnBreath": true,
+    "admissionByDriver": true,
+    "witnessedConsumption": true,
+    "other": true
+  },
+  "last_drink": "test",
+  "driver_continuously_observed": "NO",
 };
 
 /**
@@ -75,6 +108,6 @@ export const sampleData: Record<string, any> = {
  *   rendering. Set to null to pass the form data through unchanged.
  */
 export const sampleComponentSettings: Record<string, any> = {
-  stage: "stageOne",
+  stage: "rts",
   rsbcImageSettings: null,
 };

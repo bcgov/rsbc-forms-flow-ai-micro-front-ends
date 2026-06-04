@@ -11,6 +11,9 @@ jest.mock('../src/assets/MV2634_012026_driver.png', () => 'mock-24v2-driver.png'
 jest.mock('../src/assets/MV2634_012026_ilo.png', () => 'mock-24v2-ilo.png');
 jest.mock('../src/assets/MV2634_012026_icbc.png', () => 'mock-24v2-police.png');
 jest.mock('../src/assets/MV2723_0216.png', () => 'mock-irp.png');
+jest.mock('../src/assets/MV2723_0216_2.png', () => 'mock-irp-back.png');
+jest.mock('../src/assets/MV2724_0120.png', () => 'mock-rts.png');
+jest.mock('../src/assets/MV2724_0120_2.png', () => 'mock-rts-back.png');
 
 import {
   formsPNGVersions,
@@ -20,12 +23,15 @@ import {
 } from '../src/helpers/helperServices';
 
 describe('helperServices', () => {
-  test('formsPNGVersions exposes both supported versions', () => {
+  test('formsPNGVersions exposes both supported versions and RTS mappings', () => {
     expect(Object.keys(formsPNGVersions)).toEqual(['version1', 'version2']);
     expect(formsPNGVersions.version1.stageOne.TwentyFourHour.DRIVER.png).toBe(
       'mock-24-driver.png'
     );
     expect(formsPNGVersions.version2.stageOne.IRP.DRIVER.png).toBe('mock-irp.png');
+    expect(formsPNGVersions.version2.stageOne.IRP.DRIVER_BACK.png).toBe('mock-irp-back.png');
+    expect(formsPNGVersions.version2.rts.IRP.RTS.png).toBe('mock-rts.png');
+    expect(formsPNGVersions.version2.rts.IRP.RTS_BACK.png).toBe('mock-rts-back.png');
   });
 
   test('handleError logs prefixed error message', () => {
@@ -216,5 +222,23 @@ describe('helperServices', () => {
     expect(
       printCheckHelper({ release_type: 'roadside' }, { field_name: 'release_type', field_val: 'roadside' }, 'X')
     ).toBe(true);
+  });
+
+  test('printCheckHelper supports object-key lookups for nested toggle maps', () => {
+    expect(
+      printCheckHelper(
+        { selected_forms: { RTS: true, DRIVER: false } },
+        { field_name: 'selected_forms', field_val: 'RTS' },
+        'X'
+      )
+    ).toBe(true);
+
+    expect(
+      printCheckHelper(
+        { selected_forms: { RTS: true, DRIVER: false } },
+        { field_name: 'selected_forms', field_val: 'DRIVER' },
+        'X'
+      )
+    ).toBe(false);
   });
 });
