@@ -3558,164 +3558,127 @@
         "field_name": "irp_time_2nd_test",
         "classNames": "fontSmall",
         "start": {
-          "x": 101,
+          "x": 99,
           "y": 118
         }
       },
       "RTS_SECOND_ASD_RESULT_SHOWN_YES": {
         "field_type": "checkbox",
-        "field_name": "irp_result_shown_2nd_test",
+        "field_name": "irp_result_shown_driver_2nd_test",
         "field_val": "YES",
         "classNames": "fontText",
         "start": {
-          "x": 101,
-          "y": 130.2
+          "x": 122,
+          "y": 118
         }
       },
       "RTS_SECOND_ASD_RESULT_SHOWN_NO": {
         "field_type": "checkbox",
-        "field_name": "irp_result_shown_2nd_test",
+        "field_name": "irp_result_shown_driver_2nd_test",
         "field_val": "NO",
         "classNames": "fontText",
         "start": {
-          "x": 131.2,
-          "y": 130.2
+          "x": 133,
+          "y": 118
         }
       },
       "RTS_SECOND_ASD_WARN": {
         "field_type": "checkbox",
-        "field_name": "rts_second_asd_result",
+        "field_name": "irp_result_2nd_test",
         "field_val": "WARN",
         "classNames": "fontText",
         "start": {
-          "x": 143.0,
-          "y": 130.2
+          "x": 144,
+          "y": 118
         }
       },
       "RTS_SECOND_ASD_FAIL": {
         "field_type": "checkbox",
-        "field_name": "rts_second_asd_result",
+        "field_name": "irp_result_2nd_test",
         "field_val": "FAIL",
         "classNames": "fontText",
         "start": {
-          "x": 164.0,
-          "y": 130.2
+          "x": 154.5,
+          "y": 118
         }
       },
       "RTS_SECOND_ASD_REQUEST_WITHDRAWN": {
         "field_type": "checkbox",
-        "field_name": "rts_second_asd_request_withdrawn",
-        "field_val": "true",
+        "field_name": "irp_result_2nd_test",
+        "field_val": "WITHDRAWN",
         "classNames": "fontText",
         "start": {
-          "x": 174.0,
-          "y": 130.2
+          "x": 164,
+          "y": 117
         }
       },
       "RTS_GROUNDS_ODOR": {
         "field_type": "checkbox",
-        "field_name": "rts_grounds_odor",
-        "field_val": "true",
+        "field_name": "grounds_for_reasonable_suspicion",
+        "field_val": "odorOnBreath",
         "classNames": "fontText",
         "start": {
-          "x": 17.9,
-          "y": 138.6
+          "x": 48.5,
+          "y": 126.5
         }
       },
       "RTS_GROUNDS_ADMISSION": {
         "field_type": "checkbox",
-        "field_name": "rts_grounds_admission",
-        "field_val": "true",
+        "field_name": "grounds_for_reasonable_suspicion",
+        "field_val": "admissionByDriver",
         "classNames": "fontText",
         "start": {
-          "x": 50.7,
-          "y": 138.6
+          "x": 77,
+          "y": 126.5
         }
       },
       "RTS_GROUNDS_WITNESSED": {
         "field_type": "checkbox",
-        "field_name": "rts_grounds_witnessed",
-        "field_val": "true",
+        "field_name": "grounds_for_reasonable_suspicion",
+        "field_val": "witnessedConsumption",
         "classNames": "fontText",
         "start": {
-          "x": 84.8,
-          "y": 138.6
+          "x": 105,
+          "y": 126.5
         }
       },
       "RTS_GROUNDS_OTHER": {
         "field_type": "checkbox",
-        "field_name": "rts_grounds_other",
-        "field_val": "true",
+        "field_name": "grounds_for_reasonable_suspicion",
+        "field_val": "other",
         "classNames": "fontText",
         "start": {
-          "x": 121.6,
-          "y": 138.6
+          "x": 136,
+          "y": 126.5
         }
       },
       "RTS_LAST_DRINK_RESPONSE": {
         "field_type": "text",
-        "field_name": "rts_last_drink_response",
-        "classNames": "fontSmall",
+        "field_name": "last_drink",
+        "classNames": "fontXSmall",
         "start": {
-          "x": 118.5,
-          "y": 143.8
+          "x": 99,
+          "y": 129
         }
       },
       "RTS_OBSERVED_YES": {
         "field_type": "checkbox",
-        "field_name": "rts_observed_continuously",
+        "field_name": "driver_continuously_observed",
         "field_val": "YES",
         "classNames": "fontText",
         "start": {
-          "x": 17.5,
-          "y": 151.1
+          "x": 48.5,
+          "y": 137
         }
       },
       "RTS_OBSERVED_NO": {
         "field_type": "checkbox",
-        "field_name": "rts_observed_continuously",
+        "field_name": "driver_continuously_observed",
         "field_val": "NO",
         "classNames": "fontText",
         "start": {
-          "x": 33.7,
-          "y": 151.1
-        }
-      },
-      "RTS_NARRATIVE_PAGES": {
-        "field_type": "text",
-        "field_name": "rts_narrative_pages",
-        "classNames": "fontSmall",
-        "start": {
-          "x": 108.4,
-          "y": 161.3
-        }
-      },
-      "RTS_SWORN_CITY": {
-        "field_type": "text",
-        "field_name": "rts_sworn_city",
-        "classNames": "fontSmall",
-        "start": {
-          "x": 15.3,
-          "y": 170.2
-        }
-      },
-      "RTS_SWORN_DATE": {
-        "field_type": "text",
-        "field_name": "rts_sworn_date",
-        "date_val": "YYYY MM DD",
-        "classNames": "fontSmall",
-        "start": {
-          "x": 18.4,
-          "y": 175.2
-        }
-      },
-      "RTS_OFFICER_SIGNATURE": {
-        "field_type": "text",
-        "field_name": "officer-lastname",
-        "classNames": "fontSmall",
-        "start": {
-          "x": 117.2,
-          "y": 179.4
+          "x": 77,
+          "y": 137
         }
       },
       "RTS_OFFICER_BADGE": {
@@ -3724,17 +3687,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 117.2,
-          "y": 183.6
-        }
-      },
-      "RTS_POLICE_COPY": {
-        "field_type": "always",
-        "field_name": "",
-        "field_value": "RoadSafetyBC/Police Copy",
-        "classNames": "fontXSmall",
-        "start": {
-          "x": 92.7,
-          "y": 187.4
+          "y": 167
         }
       }
     },
@@ -3867,12 +3820,7 @@
       "RTS_LAST_DRINK_RESPONSE",
       "RTS_OBSERVED_YES",
       "RTS_OBSERVED_NO",
-      "RTS_NARRATIVE_PAGES",
-      "RTS_SWORN_CITY",
-      "RTS_SWORN_DATE",
-      "RTS_OFFICER_SIGNATURE",
-      "RTS_OFFICER_BADGE",
-      "RTS_POLICE_COPY"
+      "RTS_OFFICER_BADGE"
     ],
     "RTS_BACK": []
   }

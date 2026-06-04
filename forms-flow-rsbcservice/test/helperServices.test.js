@@ -11,6 +11,9 @@ jest.mock('../src/assets/MV2634_012026_driver.png', () => 'mock-24v2-driver.png'
 jest.mock('../src/assets/MV2634_012026_ilo.png', () => 'mock-24v2-ilo.png');
 jest.mock('../src/assets/MV2634_012026_icbc.png', () => 'mock-24v2-police.png');
 jest.mock('../src/assets/MV2723_0216.png', () => 'mock-irp.png');
+jest.mock('../src/assets/MV2723_0216_2.png', () => 'mock-irp-back.png');
+jest.mock('../src/assets/MV2724_0120.png', () => 'mock-rts.png');
+jest.mock('../src/assets/MV2724_0120_2.png', () => 'mock-rts-back.png');
 
 import {
   formsPNGVersions,

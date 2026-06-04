@@ -89,8 +89,15 @@ export const sampleData: Record<string, any> = {
   "irp_serial_2nd_test": "3345777",
   "irp_time_2nd_test": "09:22",
   "irp_result_shown_driver_2nd_test": "NO",
-  "irp_result_2nd_test": "FAIL",
-
+  "irp_result_2nd_test": "WITHDRAWN", //WITHDRAWN
+  "grounds_for_reasonable_suspicion": {
+    "odorOnBreath": true,
+    "admissionByDriver": true,
+    "witnessedConsumption": true,
+    "other": true
+  },
+  "last_drink": "test",
+  "driver_continuously_observed": "NO",
 };
 
 /**
