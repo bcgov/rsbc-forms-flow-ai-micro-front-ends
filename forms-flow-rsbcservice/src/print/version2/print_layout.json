@@ -1274,8 +1274,7 @@
       },
       "DRIVER_DL_EXPIRY": {
         "field_type": "text",
-        "field_name": "driver_licence_expiry",
-        "date_val": "YYYY",
+        "field_name": "driver_licence_expiry_year",
         "classNames": "fontSmall",
         "start": {
           "x": 142.5,
@@ -2956,8 +2955,7 @@
       },
       "DRIVER_DL_EXPIRY": {
         "field_type": "text",
-        "field_name": "driver_licence_expiry",
-        "date_val": "YYYY",
+        "field_name": "driver_licence_expiry_year",
         "classNames": "fontSmall",
         "start": {
           "x": 97,
