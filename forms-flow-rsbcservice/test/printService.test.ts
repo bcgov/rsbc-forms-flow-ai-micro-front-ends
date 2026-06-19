@@ -29,6 +29,15 @@ jest.mock('../src/helpers/helperServices', () => ({
         },
       },
     },
+    version2: {
+      rts: {
+        IRP: {
+          RTS: { png: 'rts-front', aspectClass: '--portrait' },
+          RTS_BACK: { png: 'rts-back', aspectClass: '--portrait' },
+          POLICE: { png: 'irp-police', aspectClass: '--portrait' },
+        },
+      },
+    },
   },
 }));
 
@@ -139,5 +148,24 @@ describe('PrintServices', () => {
     expect(children).toHaveLength(2);
     expect(children[0].props.formVersion).toBe('version1');
     expect(children[0].props.form).toBe('24-driver');
+  });
+
+  test('renders RTS stage IRP pages for version2 mappings', async () => {
+    const service = new PrintServices();
+    const values = {
+      IRP: true,
+      form_version: 'version2',
+    };
+
+    const rendered = await service.renderSVGForm(values, false, false, 'rts', false);
+
+    expect(rendered).toHaveLength(1);
+    expect(rendered[0].props.id).toBe('IRP');
+
+    const children = getChildren(rendered);
+    expect(children).toHaveLength(3);
+    expect(children.map((child) => child.props.formType)).toEqual(['RTS', 'RTS_BACK', 'POLICE']);
+    expect(children.map((child) => child.props.form)).toEqual(['rts-front', 'rts-back', 'irp-police']);
+    expect(children.every((child) => child.props.renderStage === 'rts')).toBe(true);
   });
 });

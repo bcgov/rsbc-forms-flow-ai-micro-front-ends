@@ -12,6 +12,9 @@ import twentyFourHourDriverformVersion2 from "../assets/MV2634_012026_driver.png
 import twentyFourHourILOformVersion2 from "../assets/MV2634_012026_ilo.png";
 import twentyFourHourPoliceformVersion2 from "../assets/MV2634_012026_icbc.png";
 import irpForm from "../assets/MV2723_0216.png";
+import irpBackForm from "../assets/MV2723_0216_2.png";
+import rtsForm from "../assets/MV2724_0120.png";
+import rtsBackForm from "../assets/MV2724_0120_2.png";
 
 interface FormEntry {
   png: string;
@@ -38,13 +41,17 @@ interface Stage {
   };
   IRP?: {
     DRIVER?: FormEntry;
+    DRIVER_BACK?: FormEntry;
     POLICE?: FormEntry;
+    RTS?: FormEntry;
+    RTS_BACK?: FormEntry;
   };
 }
 
 interface FormsPNG {
   stageOne: Stage;
   stageTwo: Stage;
+  rts?: Stage;
 }
 
 interface FormsPNGVersions {
@@ -93,11 +100,12 @@ const formsPNGVersion2: FormsPNG = {
     },
     VI: {
       DRIVER: { png: viDriverForm, aspectClass: "--portrait" },
-      APPEAL: { png: appealsForm, aspectClass: "--portrait" },
+      APPEAL: { png: appealsForm, aspectClass: "--portrait-upside-down" },
       ILO: { png: viDriverForm, aspectClass: "--portrait" },
     },
     IRP: {
       DRIVER: { png: irpForm, aspectClass: "--portrait" },
+      DRIVER_BACK: { png: irpBackForm, aspectClass: "--portrait-upside-down" },
     },
   },
   stageTwo: {
@@ -116,6 +124,18 @@ const formsPNGVersion2: FormsPNG = {
       POLICE: { png: irpForm, aspectClass: "--portrait" },
     },
   },
+  rts: {
+    IRP: {
+      RTS: { png: rtsForm, aspectClass: "--portrait" },
+      RTS_BACK: { png: rtsBackForm, aspectClass: "--portrait-upside-down" },
+      POLICE: { png: irpForm, aspectClass: "--portrait" },
+    },
+    VI: {
+      POLICE: { png: viDriverForm, aspectClass: "--portrait" },
+      REPORT: { png: viReportForm, aspectClass: "--portrait" },
+      DETAILS: { png: viIncidentDetails, aspectClass: "--portrait" },
+    },
+  }
 };
 
 export const formsPNGVersions: FormsPNGVersions = {
@@ -401,6 +421,12 @@ export const printCheckHelper = (
   }
   if (Array.isArray(data.field_val)) {
     return data.field_val.includes(values[data.field_name]);
+  }
+  if (typeof values[data.field_name] === "object" &&
+      !!data.field_val &&
+      typeof data.field_val === "string" &&
+      data.field_val in values[data.field_name]) {
+    return !!values[data.field_name][data.field_val];
   }
   return values[data.field_name] === data.field_val;
 };

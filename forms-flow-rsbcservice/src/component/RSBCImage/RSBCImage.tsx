@@ -133,7 +133,7 @@ export default class RSBCImage extends ReactComponent {
       return;
     }
 
-    if (requireConfirmation && this.component.stage !== "stageTwo") {
+    if (requireConfirmation && this.component.stage !== "stageTwo" && this.component.stage !== "rts") {
       const proceedToPrint = await this.showConfirmationDialog(
         "If you print this form you cannot go back and edit it, please confirm you wish to proceed.",
         "Print",
@@ -161,7 +161,7 @@ export default class RSBCImage extends ReactComponent {
 
     const handleAfterPrint = async () => {
       window.removeEventListener("afterprint", handleAfterPrint);
-      if (requireConfirmation && this.component.stage !== "stageTwo") {
+      if (requireConfirmation && this.component.stage !== "stageTwo" && this.component.stage !== "rts") {
         const userConfirmed = await this.showConfirmationDialog(
           "Did it print successfully?",
           "Yes",
@@ -233,7 +233,7 @@ export default class RSBCImage extends ReactComponent {
     stage: string = "stageOne"
   ): Promise<Record<string, string>> {
     try {
-      const validStages = ["stageOne", "stageTwo"];
+      const validStages = ["stageOne", "stageTwo", "rts"];
       if (!validStages.includes(stage)) {
         throw new Error(
           `Invalid stage: "${stage}". Expected values: ${validStages.join(

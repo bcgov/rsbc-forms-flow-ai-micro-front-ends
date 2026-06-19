@@ -109,5 +109,9 @@ $font_path: ("../assets");
       transform: scale(1.25) translate(-25px, 110px);
       display: block !important;
     }
+    &--portrait-upside-down {
+      transform: rotate(180deg) scale(1.25) translate(-30px, -110px);
+      display: block !important;
+    }
   }
 }
