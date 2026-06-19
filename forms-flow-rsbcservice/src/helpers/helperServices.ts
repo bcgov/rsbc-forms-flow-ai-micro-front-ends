@@ -100,12 +100,12 @@ const formsPNGVersion2: FormsPNG = {
     },
     VI: {
       DRIVER: { png: viDriverForm, aspectClass: "--portrait" },
-      APPEAL: { png: appealsForm, aspectClass: "--portrait" },
+      APPEAL: { png: appealsForm, aspectClass: "--portrait-upside-down" },
       ILO: { png: viDriverForm, aspectClass: "--portrait" },
     },
     IRP: {
       DRIVER: { png: irpForm, aspectClass: "--portrait" },
-      DRIVER_BACK: { png: irpBackForm, aspectClass: "--portrait" },
+      DRIVER_BACK: { png: irpBackForm, aspectClass: "--portrait-upside-down" },
     },
   },
   stageTwo: {
@@ -127,7 +127,7 @@ const formsPNGVersion2: FormsPNG = {
   rts: {
     IRP: {
       RTS: { png: rtsForm, aspectClass: "--portrait" },
-      RTS_BACK: { png: rtsBackForm, aspectClass: "--portrait" },
+      RTS_BACK: { png: rtsBackForm, aspectClass: "--portrait-upside-down" },
       POLICE: { png: irpForm, aspectClass: "--portrait" },
     },
     VI: {
