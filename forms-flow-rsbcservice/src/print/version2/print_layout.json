@@ -1515,7 +1515,8 @@
         "field_name": "irp_impound_duration",
         "field_val": [
           "BACWARN30",
-          "BACFAIL"
+          "BACFAIL",
+          "BACREFUSAL"
         ],
         "classNames": "fontSmall",
         "start": {
