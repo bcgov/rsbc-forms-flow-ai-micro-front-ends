@@ -2040,7 +2040,7 @@
       },
       "INCIDENT_DETAILS_ATTACHED": {
         "field_type": "checkbox",
-        "field_name": "incident_details_extra_page",
+        "field_name": "incident_details_attached",
         "field_val": "true",
         "classNames": "fontSmall",
         "start": {

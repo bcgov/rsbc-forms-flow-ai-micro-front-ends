@@ -6,10 +6,10 @@
  */
 export const sampleData: Record<string, any> = {
   // Form selection — controls which print layouts are rendered
-  VI: false,
+  VI: true,
   TwentyFourHour: false,
   TwelveHour: false,
-  IRP: true,
+  IRP: false,
 
   form_version: "version2",
 
@@ -62,6 +62,10 @@ export const sampleData: Record<string, any> = {
   // Impound information
   vehicle_impounded: "NO",
   date_of_impound: "2025-04-14",
+  incident_details_explained_below: false,
+  incident_details_extra_page: false,
+  incident_details_attached: false,
+  incident_details: "The driver was observed swerving and failing to maintain lane discipline. Upon stopping the vehicle, the officer detected a strong odor of alcohol on the driver's breath.",
 
   // IRP-specific fields
   seized_DL: "NO",
