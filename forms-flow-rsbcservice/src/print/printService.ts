@@ -44,6 +44,9 @@ class PrintServices {
       valuesCopy["date_released"] = null;
       valuesCopy["time_released"] = null;
     }
+    if (values["VI"] && !values["IRP"]) {
+      valuesCopy["IRP_number"] = null;
+    }
     if (values["IRP"]) {
       if (!values["VI"]) {
         valuesCopy["VI_number"] = null;
@@ -140,7 +143,7 @@ class PrintServices {
         values["TwentyFourHour"] &&
         item === "TwentyFourHour") ||
       (formKey === "ILO" && values["vehicle_impounded"] === "NO") ||
-      (formKey === "DETAILS" && values["incident_details"]?.length < 500)
+      (formKey === "DETAILS" && (values["incident_details_attached"] || values["incident_details"]?.length < 500))
     );
   }
 }
