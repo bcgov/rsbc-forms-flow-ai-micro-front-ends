@@ -195,12 +195,16 @@ hr {
   padding-right: var(--spacer-150) !important;
 }
 
+:root {
+  --notifications-offset: 0px;
+}
+
 .main-container {
   overflow: hidden !important;
   background: var(--ff-main-bg);
   margin-left: var(--navbar-width);
-  margin-top: 0;
-  height: 100vh !important;
+  margin-top: var(--notifications-offset) !important;
+  height: calc(100% - var(--notifications-offset)) !important;
 }
 
 .min-container-height {
@@ -249,7 +253,8 @@ hr {
 @media (max-width: 768px) {
   .main-container {
     margin-left: 0;
-    height: 100vh !important;
+    margin-top: var(--notifications-offset);
+    height: calc(100% - var(--notifications-offset)) !important;
   }
 }
 
