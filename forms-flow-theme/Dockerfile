@@ -20,7 +20,7 @@ RUN npm install
 
 COPY . /forms-flow-theme/app/
 
-RUN npm run build:webpack
+RUN npm run build
 
 
 FROM nginx:1.29.3-alpine AS  production-stage
