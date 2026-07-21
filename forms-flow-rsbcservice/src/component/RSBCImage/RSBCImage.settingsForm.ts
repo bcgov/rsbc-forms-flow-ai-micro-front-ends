@@ -25,6 +25,7 @@ const settingsForm = (...extend) => {
               values: [
                 { label: "Stage One", value: "stageOne" },
                 { label: "Stage Two", value: "stageTwo" },
+                { label: "RTS", value: "rts" },
               ],
             },
             weight: 20,
