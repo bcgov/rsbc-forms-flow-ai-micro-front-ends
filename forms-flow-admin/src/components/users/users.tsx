@@ -1,22 +1,15 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Button, DropdownButton, Dropdown, Form, Modal, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { Translation, useTranslation } from "react-i18next";
 import Loading from "../loading";
 import { AddUserRole, RemoveUserRole } from "../../services/users";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
 import { toast } from "react-toastify";
-import { Tooltip } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal"; // Import Modal from react-bootstrap
-import "./users.scss";
 import { KEYCLOAK_ENABLE_CLIENT_AUTH,MULTITENANCY_ENABLED } from "../../constants";
 import Select from "react-select";
 import { CreateUser } from "../../services/users";
 import { TableFooter, CustomSearch } from "@formsflow/components";
+import "./users.scss";
 
 const Users = React.memo((props: any) => {
   const [selectedRow, setSelectedRow] = React.useState(null);

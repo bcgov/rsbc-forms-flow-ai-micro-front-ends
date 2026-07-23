@@ -3,8 +3,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import "./roles.scss";
 import { useParams } from "react-router-dom";
 import { Translation, useTranslation } from "react-i18next";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Button, Dropdown, DropdownButton, Form, Modal, OverlayTrigger, Popover } from "react-bootstrap";
 import { fetchUsers } from "../../services/users";
 import {
   CreateRole,
@@ -12,12 +11,7 @@ import {
   UpdateRole,
   fetchPermissions,
 } from "../../services/roles";
-import Modal from "react-bootstrap/Modal";
 import Loading from "../loading";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
 import { toast } from "react-toastify";
 import {
   KEYCLOAK_ENABLE_CLIENT_AUTH,
