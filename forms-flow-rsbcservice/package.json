@@ -23,12 +23,12 @@
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@babel/runtime": "^7.28.4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
     "@types/leaflet": "^1.9.20",
     "@types/react-dom": "^19.0.3",
     "@types/react-leaflet": "^3.0.0",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@types/jest": "^30.0.0",
     "babel-jest": "^30.3.0",
     "concurrently": "^6.5.1",
     "copy-webpack-plugin": "^14.0.0",
@@ -41,6 +41,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.3.0",
     "jest-cli": "^30.3.0",
+    "jest-environment-jsdom": "^30.2.0",
     "prettier": "^2.8.8",
     "pretty-quick": "^3.3.1",
     "sass": "^1.83.4",
@@ -52,8 +53,7 @@
     "webpack-cli": "^4.10.0",
     "webpack-config-single-spa-ts": "^4.1.4",
     "webpack-dev-server": "^5.2.3",
-    "webpack-merge": "^5.10.0",
-    "jest-environment-jsdom": "^30.2.0"
+    "webpack-merge": "^5.10.0"
   },
   "dependencies": {
     "@aot-technologies/formio-react": "^1.0.4",
@@ -71,6 +71,8 @@
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.47",
     "pubsub-js": "^1.9.5",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-i18next": "^15.4.0",
     "react-leaflet": "^4.2.1",
     "single-spa": "^5.9.5"
