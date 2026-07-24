@@ -126,6 +126,7 @@ const formsPNGVersion2: FormsPNG = {
   },
   rts: {
     IRP: {
+      POLICE: { png: irpForm, aspectClass: "--portrait" },      
       RTS: { png: rtsForm, aspectClass: "--portrait" },
       RTS_BACK: { png: rtsBackForm, aspectClass: "--portrait-upside-down" },
     },
