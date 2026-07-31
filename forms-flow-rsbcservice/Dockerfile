@@ -16,14 +16,14 @@ RUN apk update && apk upgrade && \
 COPY package-lock.json /forms-flow-rsbcservice/app/package-lock.json
 COPY package.json /forms-flow-rsbcservice/app/package.json
 
-RUN npm install
+RUN npm ci --force --legacy-peer-deps
 
 COPY . /forms-flow-rsbcservice/app/
 
 RUN npm run build:webpack
 
 
-FROM nginx:1.29.3-alpine AS production-stage
+FROM nginx:1.30-alpine AS production-stage
 
 # set label for image
 LABEL Name="formsflow"
