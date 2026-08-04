@@ -3518,10 +3518,10 @@
       "RTS_FIRST_ASD_SERIAL": {
         "field_type": "text",
         "field_name": "irp_serial_1st_test",
-        "classNames": "fontSmall",
+        "classNames": "fontXXXSmall",
         "start": {
-          "x": 84,
-          "y": 115
+          "x": 83,
+          "y": 114
         }
       },
       "RTS_FIRST_ASD_TIME": {
@@ -3676,10 +3676,10 @@
       "RTS_SECOND_ASD_SERIAL": {
         "field_type": "text",
         "field_name": "irp_serial_2nd_test",
-        "classNames": "fontSmall",
+        "classNames": "fontXXXSmall",
         "start": {
-          "x": 84,
-          "y": 133.5
+          "x": 83,
+          "y": 133
         }
       },
       "RTS_SECOND_ASD_TIME": {
