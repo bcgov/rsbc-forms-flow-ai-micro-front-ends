@@ -44,7 +44,7 @@ class PrintServices {
       valuesCopy["date_released"] = null;
       valuesCopy["time_released"] = null;
     }
-    if (values["VI"] && !values["IRP"]) {
+    if (values["VI"] && !values["IRP"] && values["irp_impound"] !== "YES") {
       valuesCopy["IRP_number"] = null;
     }
     if (values["IRP"]) {

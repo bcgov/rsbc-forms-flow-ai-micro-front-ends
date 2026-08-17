@@ -107,6 +107,7 @@ class OfflineSaveService {
           await rsbcDb.user.clear();
           await rsbcDb.user.put(data);
           console.log("User data saved to IndexedDB.");
+          localStorage.setItem("user_data", JSON.stringify(data));
           break;
         case "userRoles":
           await rsbcDb.userRoles.clear();

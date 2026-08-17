@@ -1,8 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Loading from "../loading";
 import { useParams } from "react-router-dom";

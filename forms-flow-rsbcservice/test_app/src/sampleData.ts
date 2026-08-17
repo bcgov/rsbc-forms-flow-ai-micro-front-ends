@@ -6,10 +6,10 @@
  */
 export const sampleData: Record<string, any> = {
   // Form selection — controls which print layouts are rendered
-  VI: true,
+  VI: false,
   TwentyFourHour: false,
   TwelveHour: false,
-  IRP: false,
+  IRP: true,
 
   form_version: "version2",
 
@@ -62,17 +62,21 @@ export const sampleData: Record<string, any> = {
   // Impound information
   vehicle_impounded: "NO",
   date_of_impound: "2025-04-14",
-  incident_details_explained_below: false,
+  incident_details_explained_below: true,
   incident_details_extra_page: false,
-  incident_details_attached: false,
+  // incident_details_attached: true,
   incident_details: "The driver was observed swerving and failing to maintain lane discipline. Upon stopping the vehicle, the officer detected a strong odor of alcohol on the driver's breath.",
 
   // IRP-specific fields
   seized_DL: "NO",
   irp_impound_duration: "BACREFUSAL",
+  "irp_basics_ASD": {
+    reasonableSuspicionFormed: true,
+    mandatoryAlcoholScreeningDemand: true
+  },
   time_suspicion_formed: "14:35",
   time_ASD_demand: "14:40",
-  driver_refuse_breath_sample: "NO",
+  driver_refuse_breath_sample: "YES",
   time_breath_sample_refusal: "14:45",
   irp_reason_grounds: {
       witnessedByOfficer: true,
@@ -80,20 +84,20 @@ export const sampleData: Record<string, any> = {
       independentWitness: true,
       other: true
   },
-  "irp_asd_identification_1st_test": "alco-sensor",
+  "irp_asd_identification_1st_test": "alcotest-6000",
   "irp_serial_1st_test": "test",
   "irp_time_1st_test": "09:12",
-  "irp_result_shown_driver_1st_test": "NO",
-  "irp_result_1st_test": "FAIL",
-  "irp_right_2nd_test": "YES",
-  "irp_right_different_asd": "YES",
-  "irp_lower_test_prevail": "YES",
-  "irp_driver_request_2nd_test": "YES",
+  "irp_result_shown_driver_1st_test": "YES",
+  "irp_result_1st_test": "WARN",
+  "irp_right_2nd_test": "NO",
+  "irp_right_different_asd": "NO",
+  "irp_lower_test_prevail": "NO",
+  "irp_driver_request_2nd_test": "NO",
   "irp_asd_identification_2nd_test": "alcotest-6000",
   "irp_serial_2nd_test": "3345777",
   "irp_time_2nd_test": "09:22",
-  "irp_result_shown_driver_2nd_test": "NO",
-  "irp_result_2nd_test": "WITHDRAWN", //WITHDRAWN
+  "irp_result_shown_driver_2nd_test": "YES",
+  "irp_result_2nd_test": "FAIL", //WITHDRAWN
   "grounds_for_reasonable_suspicion": {
     "odorOnBreath": true,
     "admissionByDriver": true,
@@ -101,7 +105,9 @@ export const sampleData: Record<string, any> = {
     "other": true
   },
   "last_drink": "test",
-  "driver_continuously_observed": "NO",
+  "driver_continuously_observed": "YES",
+  "submitterLastName": "SMITH",
+  "submitterFirstName": "JOHN",
 };
 
 /**
