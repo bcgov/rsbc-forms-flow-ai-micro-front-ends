@@ -85,7 +85,7 @@ export const sampleData: Record<string, any> = {
       other: true
   },
   "irp_asd_identification_1st_test": "alcotest-6000",
-  "irp_serial_1st_test": "test",
+  "irp_serial_1st_test": "09876543210987654321",
   "irp_time_1st_test": "09:12",
   "irp_result_shown_driver_1st_test": "YES",
   "irp_result_1st_test": "WARN",

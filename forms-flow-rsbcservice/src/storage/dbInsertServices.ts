@@ -12,7 +12,6 @@ import OfflineFetchService from "./dbFetchServices";
 import DBServiceHelper from "../helpers/helperDbServices";
 import { fetchFormIDs } from "../request/formIdApi";
 import { getUserData } from "../request/getUserDataApi";
-import { getUserRoles } from "../request/getUserRolesApi";
 import {
   REACT_APP_FORM_ID_12HOUR_LIMIT,
   REACT_APP_FORM_ID_24HOUR_LIMIT,
@@ -199,13 +198,6 @@ class OfflineSaveService {
         (error: any) => handleError(error)
       );
     }
-
-    // get user roles
-    await getUserRoles(
-      DBServiceHelper.getAuthorizationToken(),
-      (data: any) => this.saveRSBCDataToIndexedDB("userRoles", data),
-      (error: any) => handleError(error)
-    );
   }
 
   /**

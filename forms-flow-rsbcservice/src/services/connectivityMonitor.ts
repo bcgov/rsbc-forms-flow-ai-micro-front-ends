@@ -1,5 +1,5 @@
 import DBServiceHelper from "../helpers/helperDbServices";
-import { fetchStaticData } from "../request/staticDataApi";
+import { pingApi } from "../request/pingApi";
 import { updateUserLastActiveApi } from '../request/updateUserLastActiveApi';
 import { POOR_CONNECTION_THRESHOLD, UPDATE_LAST_ACTIVE_TIMER } from "../endpoints/config";
 
@@ -36,8 +36,7 @@ class ConnectivityMonitor {
   private async checkConnectivityWithApi() {   
     try {
       if (this.isConnected) {
-        await fetchStaticData(
-          "cities",         
+        await pingApi(
           (data: any) => {
             console.log("[ConnectivityMonitor] Connection is healthy.");
             this.hasPoorConnection = false;
