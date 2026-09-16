@@ -130,8 +130,8 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
       }
     });
     props.subscribe("ES_TASK_COUNT", (msg, data) => {
-      if (data && data.tasksCount !== reviewTaskCount) {
-        setReviewTaskCount(data.tasksCount);
+      if (data) {
+        setReviewTaskCount((prev) => (data.tasksCount !== prev ? data.tasksCount : prev));
       }
     });
   }, []);

@@ -15,20 +15,23 @@ class RequestService {
     isBearer: boolean = true,
     headers: object | null = null
   ): any {
+    headers = RequestService.createHeaders(headers, isBearer, token);
     return axios.get(url, {
       params: data,
-      headers: !headers
-        ? {
-            Authorization: isBearer
-              ? `Bearer ${
-                  token || StorageService.get(StorageService.User.AUTH_TOKEN)
-                }`
-              : token,
-          }
-        : headers,
+      headers: headers,
     });
   }
  
+  private static createHeaders(headers: object | null, isBearer: boolean, token: string | null) {
+    headers = {
+      ...headers,
+      Authorization: isBearer
+        ? `Bearer ${token || StorageService.get(StorageService.User.AUTH_TOKEN)}`
+        : token,
+    };
+    return headers;
+  }
+
   public static httpGETRequestWithTimeout(
     url: string,
     data: object | null,
@@ -37,17 +40,10 @@ class RequestService {
     headers: object | null = null,
     timeout: number | null = 30000
   ): any {
+    headers = RequestService.createHeaders(headers, isBearer, token);
     return axios.get(url, {
       params: data,
-      headers: !headers
-        ? {
-            Authorization: isBearer
-              ? `Bearer ${
-                  token || StorageService.get(StorageService.User.AUTH_TOKEN)
-                }`
-              : token,
-          }
-        : headers,
+      headers: headers,
       timeout: timeout,
     });
   }
@@ -62,15 +58,7 @@ class RequestService {
     return axios.get(url, {
       params: data,
       responseType: "blob",
-      headers: !headers
-        ? {
-            Authorization: isBearer
-              ? `Bearer ${
-                  token || StorageService.get(StorageService.User.AUTH_TOKEN)
-                }`
-              : token,
-          }
-        : headers,
+      headers: RequestService.createHeaders(headers, isBearer, token),
     });
   }
   public static httpPOSTRequest(
@@ -81,15 +69,7 @@ class RequestService {
     headers: object | null = null
   ): any {
     return axios.post(url, data, {
-      headers: !headers
-        ? {
-            Authorization: isBearer
-              ? `Bearer ${
-                  token || StorageService.get(StorageService.User.AUTH_TOKEN)
-                }`
-              : token,
-          }
-        : headers,
+      headers: RequestService.createHeaders(headers, isBearer, token),
     });
   }
 
@@ -106,10 +86,7 @@ class RequestService {
     formData.append("data", supportData);
       return axios.post(url, formData, {
       headers: {
-        ...headers,
-        Authorization: isBearer
-          ? `Bearer ${token || StorageService.get(StorageService.User.AUTH_TOKEN)}`
-          : token,
+        ...RequestService.createHeaders(headers, isBearer, token),
         "Content-Type": "multipart/form-data",
       },
     });
@@ -126,15 +103,7 @@ class RequestService {
     return axios.post(url, data, {
       params: params,
       responseType: "blob",
-      headers: !headers
-        ? {
-            Authorization: isBearer
-              ? `Bearer ${
-                  token || StorageService.get(StorageService.User.AUTH_TOKEN)
-                }`
-              : token,
-          }
-        : headers,
+      headers: RequestService.createHeaders(headers, isBearer, token),
     });
   }
   public static httpPOSTRequestWithoutToken(url: string, data: object): any {
@@ -172,14 +141,7 @@ class RequestService {
     timeout: number = 5000
   ): any {
     return axios.post(url, data, {
-      headers: {
-            ...headers,
-            Authorization: isBearer
-              ? `Bearer ${
-                  token || StorageService.get(StorageService.User.AUTH_TOKEN)
-                }`
-              : token,
-          },
+      headers: RequestService.createHeaders(headers, isBearer, token),
       timeout: timeout,
     });
   }
