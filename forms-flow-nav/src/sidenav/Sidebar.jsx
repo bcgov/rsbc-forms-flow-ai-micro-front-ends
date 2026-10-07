@@ -178,7 +178,7 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
     },
     ANALYZE: {
       value: "analyze",
-      supportedRoutes: ["metrics", "insights"],
+      supportedRoutes: ["metrics", "insights", "rsbc/form-inventory"],
     },
     MANAGE: {
       value: "manage",
@@ -362,7 +362,7 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
               <MenuComponent
                 baseUrl={baseUrl}
                 eventKey={SectionKeys.ANALYZE.value}
-                optionsCount="2"
+                optionsCount="3"
                 mainMenu="Analyze"
                 subMenu={[
                   {
@@ -372,6 +372,10 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
                   {
                     name: "Insights",
                     path: "insights",
+                  },
+                  {
+                    name: "Form Inventory",
+                    path: "rsbc/form-inventory",
                   }
                 ]}
                 subscribe={props.subscribe}

@@ -9,6 +9,7 @@ module.exports = (env, argv) => {
         entry: './scss/index.scss',
         output: {
             path: path.resolve(__dirname, 'dist'),
+            libraryTarget: 'system',
         },
         module: {
             rules: [
