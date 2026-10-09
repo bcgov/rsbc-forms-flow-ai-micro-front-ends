@@ -45,20 +45,21 @@ class KeycloakService {
         monitorSession: true,
         loadUserInfo: true
       };
+      // Enable logging for oidc-client-ts
+      Log.setLogger(console);
+      Log.setLevel(Log.INFO);
       this.userManager = new UserManager(this._userManagerConfig);
       this._connectivityMonitor = window['connectivityMonitor'];
       if (!this._connectivityMonitor) {
         window.addEventListener('connectivityMonitorReady', () => {
           this._connectivityMonitor = window['connectivityMonitor'];
+          // Set up event handlers
+          this.setupEventHandlers();
         }, { once: true });
+      } else {        
+        // Set up event handlers
+        this.setupEventHandlers();
       }
-
-      // Enable logging for oidc-client-ts
-      Log.setLogger(console);
-      Log.setLevel(Log.INFO);
-      
-      // Set up event handlers
-      this.setupEventHandlers();
     }
 
     /**
@@ -248,7 +249,7 @@ class KeycloakService {
       console.log("[KeycloakService] Setting up token refresh interval");
       this.timerId = setInterval(
         async () => {
-          if (!this._connectivityMonitor.getIsOnline()) {
+          if (!this._connectivityMonitor || !this._connectivityMonitor.getIsOnline()) {
             console.debug("[KeycloakService] Offline: Skipping token refresh.");
             return;
           }
@@ -269,7 +270,7 @@ class KeycloakService {
      * Handle token refresh failure
      */
     private handleTokenRefreshFailure(): void {
-      if (!this._connectivityMonitor.getIsOnline()) {
+      if (!this._connectivityMonitor || !this._connectivityMonitor.getIsOnline()) {
         if (!this.isWaitingForOnline) {
           this.isWaitingForOnline = true;
           console.debug(
@@ -410,7 +411,7 @@ class KeycloakService {
       }
 
       // Check if offline and try to initialize with stored credentials
-      if (!this._connectivityMonitor.getIsOnline()) {
+      if (!this._connectivityMonitor || !this._connectivityMonitor.getIsOnline()) {
         console.log("[KeycloakService] - Offline detected during initialization");
         if (this.initOfflineMode()) {
           callback(true);

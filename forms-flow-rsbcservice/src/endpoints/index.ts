@@ -8,6 +8,7 @@ const API = {
   GET_USER: `${RSBC_API_URL}/api/v1/users/<user_id>`,
   GET_ROLES: `${RSBC_API_URL}/api/v1/user_roles`,
   PING: `${RSBC_API_URL}/api/v1/ping`,
+  FORM_STATISTICS: `${RSBC_API_URL}/api/v1/forms/statistics`,
 };
 
 export default API;

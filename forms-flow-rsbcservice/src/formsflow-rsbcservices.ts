@@ -7,6 +7,7 @@ import RSBCImage from "./component/RSBCImage/RSBCImage";
 import BCMapSelector from "./component/BCMapSelector/BCMapSelector";
 import OfflineSubmissions from "./services/offlineSubmissions";
 import connectivityMonitor from "./services/connectivityMonitor";
+import { FormStatistics } from "./component/FormStatistics/formStatistics";
 
 export {
   OfflineFetchService,
@@ -16,5 +17,6 @@ export {
   RSBCImage,
   BCMapSelector,
   OfflineSubmissions,
+  FormStatistics,
   connectivityMonitor
 };
