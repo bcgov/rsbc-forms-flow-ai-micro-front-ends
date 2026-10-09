@@ -11,7 +11,7 @@ const DateTimeNetworkWidget = () => {
 
   useEffect(() => {
     const updateTime = () => {
-      const now = moment().tz("America/Los_Angeles"); // Pacific Time
+      const now = moment().tz("America/Vancouver"); // Pacific Time
       setTime(now.format("HH:mm"));
       setDate(now.format("dddd, YYYY-MM-DD"));
 
