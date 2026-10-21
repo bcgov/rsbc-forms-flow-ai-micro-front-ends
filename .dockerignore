@@ -1,0 +1,8 @@
+*/dist
+*/node_modules
+.git
+.env
+secrets/
+docker-compose.yml
+*/test/
+*/test_app/

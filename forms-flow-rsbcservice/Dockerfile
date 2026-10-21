@@ -1,5 +1,5 @@
 # base image
-FROM node:22-alpine AS build-stage
+FROM node:24-alpine AS build-stage
 
 # set working directory
 WORKDIR /forms-flow-rsbcservice/app

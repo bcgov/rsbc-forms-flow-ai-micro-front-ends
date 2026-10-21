@@ -3366,7 +3366,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 49,
-          "y": 65
+          "y": 65.5
         }
       },
       "RTS_BASICS_ASD_MANDATORY": {
@@ -3376,7 +3376,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 104,
-          "y": 65
+          "y": 65.5
         }
       },
       "RTS_TIME_SUSPICION": {
@@ -3395,7 +3395,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 49,
-          "y": 76.5
+          "y": 77
         }
       },
       "RTS_GROUNDS_ADMISSION": {
@@ -3405,7 +3405,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 74,
-          "y": 76.5
+          "y": 77
         }
       },
       "RTS_GROUNDS_WITNESSED": {
@@ -3414,8 +3414,8 @@
         "field_val": "witnessedConsumption",
         "classNames": "fontSmall",
         "start": {
-          "x": 107,
-          "y": 76.5
+          "x": 107.2,
+          "y": 77
         }
       },
       "RTS_GROUNDS_OTHER": {
@@ -3424,8 +3424,8 @@
         "field_val": "other",
         "classNames": "fontSmall",
         "start": {
-          "x": 132,
-          "y": 76.5
+          "x": 132.2,
+          "y": 77
         }
       },
       "RTS_TIME_ASD_DEMAND": {
@@ -3453,7 +3453,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 156,
-          "y": 96.2
+          "y": 96.5
         }
       },
       "RTS_OBSERVED_NO": {
@@ -3463,7 +3463,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 164,
-          "y": 96.2
+          "y": 96.5
         }
       },
       "RTS_REFUSAL_YES": {
@@ -3518,10 +3518,10 @@
       "RTS_FIRST_ASD_SERIAL": {
         "field_type": "text",
         "field_name": "irp_serial_1st_test",
-        "classNames": "fontXXXSmall",
+        "classNames": "fontSmall",
         "start": {
           "x": 83,
-          "y": 114
+          "y": 115
         }
       },
       "RTS_FIRST_ASD_TIME": {
@@ -3580,7 +3580,7 @@
         "classNames": "fontXSmall",
         "start": {
           "x": 99,
-          "y": 121
+          "y": 121.3
         }
       },
       "RTS_INFORMED_RIGHT_NO": {
@@ -3590,7 +3590,7 @@
         "classNames": "fontXSmall",
         "start": {
           "x": 105.5,
-          "y": 121
+          "y": 121.3
         }
       },
       "RTS_DIFFERENT_ASD_YES": {
@@ -3600,7 +3600,7 @@
         "classNames": "fontXSmall",
         "start": {
           "x": 99,
-          "y": 123
+          "y": 123.3
         }
       },
       "RTS_DIFFERENT_ASD_NO": {
@@ -3610,7 +3610,7 @@
         "classNames": "fontXSmall",
         "start": {
           "x": 105.5,
-          "y": 123
+          "y": 123.3
         }
       },
       "RTS_LOWER_PREVAIL_YES": {
@@ -3620,7 +3620,7 @@
         "classNames": "fontXSmall",
         "start": {
           "x": 99,
-          "y": 125
+          "y": 125.3
         }
       },
       "RTS_LOWER_PREVAIL_NO": {
@@ -3630,7 +3630,7 @@
         "classNames": "fontXSmall",
         "start": {
           "x": 105.5,
-          "y": 125
+          "y": 125.3
         }
       },
       "RTS_DRIVER_REQUEST_SECOND_YES": {
@@ -3640,7 +3640,7 @@
         "classNames": "fontXSmall",
         "start": {
           "x": 99,
-          "y": 127.5
+          "y": 127.9
         }
       },
       "RTS_DRIVER_REQUEST_SECOND_NO": {
@@ -3650,7 +3650,7 @@
         "classNames": "fontXSmall",
         "start": {
           "x": 105.5,
-          "y": 127.5
+          "y": 127.9
         }
       },
       "RTS_SECOND_ASD_IDENTIFICATION_ALCO_SENSOR": {
@@ -3660,7 +3660,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 49.5,
-          "y": 133
+          "y": 133.4
         }
       },
       "RTS_SECOND_ASD_IDENTIFICATION_ALCOTEST_6000": {
@@ -3670,16 +3670,16 @@
         "classNames": "fontSmall",
         "start": {
           "x": 68,
-          "y": 133
+          "y": 133.4
         }
       },
       "RTS_SECOND_ASD_SERIAL": {
         "field_type": "text",
         "field_name": "irp_serial_2nd_test",
-        "classNames": "fontXXXSmall",
+        "classNames": "fontSmall",
         "start": {
           "x": 83,
-          "y": 133
+          "y": 133.5
         }
       },
       "RTS_SECOND_ASD_TIME": {
@@ -3698,7 +3698,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 121,
-          "y": 133
+          "y": 133.4
         }
       },
       "RTS_SECOND_ASD_RESULT_SHOWN_NO": {
@@ -3708,7 +3708,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 128,
-          "y": 133
+          "y": 133.4
         }
       },
       "RTS_SECOND_ASD_WARN": {
@@ -3718,7 +3718,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 140,
-          "y": 133
+          "y": 133.4
         }
       },
       "RTS_SECOND_ASD_FAIL": {
@@ -3728,7 +3728,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 149,
-          "y": 133
+          "y": 133.4
         }
       },
       "RTS_SECOND_ASD_REQUEST_WITHDRAWN": {
@@ -3738,7 +3738,7 @@
         "classNames": "fontSmall",
         "start": {
           "x": 156,
-          "y": 133
+          "y": 133.4
         }
       },
       "RTS_OFFICER_LAST_NAME": {

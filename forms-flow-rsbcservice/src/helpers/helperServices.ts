@@ -13,7 +13,7 @@ import twentyFourHourILOformVersion2 from "../assets/MV2634_012026_ilo.png";
 import twentyFourHourPoliceformVersion2 from "../assets/MV2634_012026_icbc.png";
 import irpForm from "../assets/MV2723_0216.png";
 import irpBackForm from "../assets/MV2723_0216_2.png";
-import rtsForm from "../assets/MV2724_0120.png";
+import rtsForm from "../assets/MV2724_0826.png";
 import rtsBackForm from "../assets/MV2724_0120_2.png";
 
 interface FormEntry {

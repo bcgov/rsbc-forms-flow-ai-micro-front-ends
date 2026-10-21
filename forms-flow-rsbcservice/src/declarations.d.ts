@@ -38,6 +38,11 @@ declare module "*.svg" {
   export default src;
 }
 
+declare module "*.scss" {
+  const src: string;
+  export default src;
+}
+
 declare module "@formsflow/service" {
   export const {
     RequestService,
