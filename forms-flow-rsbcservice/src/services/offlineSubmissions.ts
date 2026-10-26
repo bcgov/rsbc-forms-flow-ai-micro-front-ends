@@ -1,22 +1,17 @@
 import { RequestService, KeycloakService } from "@formsflow/service";
 import {
-  API_URL,
   KEYCLOAK_CLIENT,
   KEYCLOAK_URL_AUTH,
   KEYCLOAK_URL_REALM,
   WEB_BASE_URL,
-  FORMIO_URL
+  FORMIO_URL,
+  RSBC_API_URL,
 } from "../endpoints/config";
 import {
   OfflineDeleteService,
   OfflineFetchService
 } from "../formsflow-rsbcservices";
 import { OfflineSubmission } from "../storage/ffDb";
-import {
-  FormData,
-  FormioCreateResponse,
-  RequestCreateFormat
-} from "./offlineSubmissions.interface";
 import PubSub from "pubsub-js";
 
 class OfflineSubmissions {
@@ -217,121 +212,26 @@ class OfflineSubmissions {
   private static async handleSubmission(
     data: OfflineSubmission
   ): Promise<void> {
-    if (
-      (data.localDraftId || data.localSubmissionId) &&
-      data.serverDraftId &&
-      data.serverApplicationId
-    ) {
-      // Update existing submission
-      await this.prepareAndUpdateSubmission(data);
-    } else if (
-      (data.localDraftId || data.localSubmissionId) &&
-      !data.serverDraftId &&
-      !data.serverApplicationId
-    ) {
-      // Create a new submission
-      await this.prepareAndSubmitSubmission(data);
-    }
+    await this.prepareAndSubmitSubmission(data);
   }
 
   /**
-   * Prepares and submits a new application.
+   * Prepares and submits a new offline application to DF API.
    * @param data The application submission to be created.
    */
   private static async prepareAndSubmitSubmission(
     data: OfflineSubmission
   ): Promise<void> {
     try {
-      const response: FormioCreateResponse =
-        await this.prepareAndSubmitFormioSubmission(data);
-      await this.triggerApplicationCreate(response);
+      const submissionData = data;
+      const URL = `${RSBC_API_URL}/api/v1/offline_submission`;
+
+      await RequestService.httpPOSTRequest(URL, submissionData);
       await this.deleteLocalSubmissions(data, true);
     } catch (error) {
       console.error("Error creating the submission:", error);
       throw new Error("Submission creation failed");
     }
-  }
-
-  /**
-   * Prepares and submits a Form.io submission.
-   * @param data The application submission to be submitted.
-   */
-  private static async prepareAndSubmitFormioSubmission(
-    data: OfflineSubmission
-  ) {
-    const formioUrl = `${API_URL}/form/${data.formId}/submission`;
-    const formioPayload = {
-      data: {
-        ...data.data,
-        submitted_offline: true
-      },
-      metadata: data.submissionData?.metadata,
-      state: data.submissionData?.state,
-      _vnote: data.submissionData?._vnote
-    };
-    const header = { "x-jwt-token": localStorage.getItem("formioToken") };
-
-    return RequestService.httpPOSTRequest(
-      formioUrl,
-      formioPayload,
-      null,
-      false,
-      header
-    );
-  }
-
-  /**
-   * Triggers the application creation API call after a successful submission.
-   * @param data The Form.io response data for the submission.
-   */
-  private static async triggerApplicationCreate(
-    data: FormioCreateResponse
-  ): Promise<void> {
-    const submissionData = this.prepareApplicationPayload(data);
-    const URL = `${WEB_BASE_URL}/application/create`;
-
-    await RequestService.httpPOSTRequest(URL, submissionData);
-  }
-
-  /**
-   * Prepares the payload required for creating or updating an application.
-   * @param data The Form.io response data for the submission.
-   * @returns The prepared payload for the application.
-   */
-  private static prepareApplicationPayload(
-    data: FormioCreateResponse
-  ): RequestCreateFormat {
-    const origin = `${window.location.origin}/`;
-
-    return this.getProcessReq(
-      { _id: data?.data?.form },
-      data?.data?._id,
-      origin,
-      data?.data?.data
-    );
-  }
-
-  /**
-   * Prepares the request payload for creating or updating the application.
-   * @param form The form ID.
-   * @param submissionId The submission ID.
-   * @param origin The origin of the request.
-   * @param submissionData The submission data.
-   * @returns The prepared request payload.
-   */
-  private static getProcessReq(
-    form: { _id: string | number },
-    submissionId: string | number,
-    origin: string,
-    submissionData: FormData
-  ): RequestCreateFormat {
-    return {
-      formId: form._id,
-      submissionId,
-      formUrl: this.getFormUrlWithFormIdSubmissionId(form._id, submissionId),
-      webFormUrl: `${origin}form/${form._id}/submission/${submissionId}`,
-      data: submissionData
-    };
   }
 
   /**
@@ -350,52 +250,6 @@ class OfflineSubmissions {
         submission.localSubmissionId
       );
     }
-  }
-
-  /**
-   * Generates a Form.io submission URL using the form ID and submission ID.
-   * @param formId The form ID.
-   * @param submissionId The submission ID.
-   * @returns The generated submission URL.
-   */
-  private static getFormUrlWithFormIdSubmissionId(
-    formId: string | number,
-    submissionId: string | number
-  ): string {
-    return `${FORMIO_URL}/form/${formId}/submission/${submissionId}`;
-  }
-
-  /**
-   * Prepares and updates an existing submission.
-   * @param data The submission to be updated.
-   */
-  private static async prepareAndUpdateSubmission(
-    data: OfflineSubmission
-  ): Promise<void> {
-    try {
-      const response: FormioCreateResponse =
-        await this.prepareAndSubmitFormioSubmission(data);
-      await this.triggerApplicationUpdate(response, data?.serverDraftId);
-      await this.deleteLocalSubmissions(data, true);
-    } catch (error) {
-      console.error("Error creating and updating the submission:", error);
-      throw new Error("Submission update failed");
-    }
-  }
-
-  /**
-   * Triggers the "draft/<draft_id>/submit" update API after the submission is updated.
-   * @param data The Form.io response data for the submission.
-   * @param draftId The draft ID to submit.
-   */
-  private static async triggerApplicationUpdate(
-    data: FormioCreateResponse,
-    draftId: number | string
-  ): Promise<void> {
-    const submissionData = this.prepareApplicationPayload(data);
-    const URL = `${WEB_BASE_URL}/draft/${draftId}/submit`;
-
-    await RequestService.httpPUTRequest(URL, submissionData);
   }
 
   /**
