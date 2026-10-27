@@ -1,4 +1,5 @@
 import { RequestService, KeycloakService } from "@formsflow/service";
+import { isAxiosError } from "axios";
 import {
   KEYCLOAK_CLIENT,
   KEYCLOAK_URL_AUTH,
@@ -102,6 +103,11 @@ class OfflineSubmissions {
       await OfflineDeleteService.deleteDraftDeleteWithServerId(serverDraftId);
     } catch (error) {
       console.error("Error deleting the draft:", error);
+      if (isAxiosError(error) &&
+          (error.response?.status === 400 || error.response?.status === 404)
+      ) {
+        await OfflineDeleteService.deleteDraftDeleteWithServerId(serverDraftId);
+      }
     }
   }
 
@@ -188,7 +194,13 @@ class OfflineSubmissions {
       await this.deleteLocalSubmissions(draft);
     } catch (error) {
       console.error("Error updating the submission:", error);
-      throw new Error("Draft update failed");
+      if (isAxiosError(error) &&
+          (error.response?.status === 400 || error.response?.status === 404)
+      ) {
+        await this.deleteLocalSubmissions(draft);
+      } else {
+        throw new Error("Draft update failed");
+      }
     }
   }
 
