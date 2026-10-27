@@ -95,10 +95,14 @@ class OfflineSubmissions {
   private static async deleteDrafts(serverDraftId: number): Promise<void> {
     const URL = `${WEB_BASE_URL}/draft/${serverDraftId}`;
 
-    // Delete the draft from the server
-    await RequestService.httpDELETERequest(URL);
-    // Delete the corresponding local draft entry
-    await OfflineDeleteService.deleteDraftDeleteWithServerId(serverDraftId);
+    try {
+      // Delete the draft from the server
+      await RequestService.httpDELETERequest(URL);
+      // Delete the corresponding local draft entry
+      await OfflineDeleteService.deleteDraftDeleteWithServerId(serverDraftId);
+    } catch (error) {
+      console.error("Error deleting the draft:", error);
+    }
   }
 
   /**
@@ -129,20 +133,24 @@ class OfflineSubmissions {
   private static async handleDraftSubmission(
     draft: OfflineSubmission
   ): Promise<void> {
-    if (
-      draft.localDraftId &&
-      draft.serverDraftId &&
-      draft.serverApplicationId
-    ) {
-      // Update existing draft
-      await this.prepareAndUpdateDraft(draft);
-    } else if (
-      draft.localDraftId &&
-      !draft.serverDraftId &&
-      !draft.serverApplicationId
-    ) {
-      // Create a new draft
-      await this.prepareAndSubmitDraft(draft);
+    try {
+      if (
+        draft.localDraftId &&
+        draft.serverDraftId &&
+        draft.serverApplicationId
+      ) {
+        // Update existing draft
+        await this.prepareAndUpdateDraft(draft);
+      } else if (
+        draft.localDraftId &&
+        !draft.serverDraftId &&
+        !draft.serverApplicationId
+      ) {
+        // Create a new draft
+        await this.prepareAndSubmitDraft(draft);
+      }
+    } catch (error) {
+      console.error("Error handling the draft submission:", error);
     }
   }
 
