@@ -5,3 +5,4 @@ secrets/
 docker-compose.yml
 test/
 test_app/
+dist
