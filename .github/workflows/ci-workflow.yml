@@ -28,6 +28,8 @@ on:
         type: boolean
         default: true
 
+permissions: {}
+
 jobs:
   setup-job:
     runs-on: ubuntu-latest

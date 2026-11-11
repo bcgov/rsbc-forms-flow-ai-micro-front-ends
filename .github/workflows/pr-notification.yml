@@ -6,6 +6,8 @@ on:
     branches:
       - develop
 
+permissions: {}
+
 jobs:
   notify:
     runs-on: ubuntu-latest

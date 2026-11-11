@@ -13,6 +13,8 @@ on:
 jobs:
   ci:
     uses: ./.github/workflows/ci-workflow.yml
+    permissions:
+      contents: read
     with:
       working_directory: ./forms-flow-service
       node_version: '24.x'

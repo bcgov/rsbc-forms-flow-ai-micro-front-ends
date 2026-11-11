@@ -13,10 +13,11 @@ on:
 jobs:
   ci:
     uses: ./.github/workflows/ci-workflow.yml
+    permissions:
+      contents: read
     with:
       working_directory: ./forms-flow-nav
       node_version: '24.x'
       enable_lint: false
       enable_test: false
       enable_build: true
-

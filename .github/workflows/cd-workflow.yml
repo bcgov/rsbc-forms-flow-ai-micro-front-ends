@@ -24,13 +24,13 @@ on:
       DOCKER_PASSWORD:
         required: true
 
+permissions: {}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
-      security-events: write
     if: startsWith(github.event.pull_request.head.ref, 'release/') || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout
