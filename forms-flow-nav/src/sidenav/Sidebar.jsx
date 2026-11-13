@@ -28,6 +28,7 @@ import { ApplicationLogo } from "@formsflow/components";
 import { ProfileSettingsModal } from "./ProfileSettingsModal";
 import PropTypes from 'prop-types';
 import DateTimeNetworkWidget from "./DateTimeNetworkWidget"
+import EnvironmentBadge from "./EnvironmentBadge"
 
 const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
   const [tenantLogo, setTenantLogo] = React.useState("");
@@ -408,6 +409,7 @@ const Sidebar = React.memo(({ props, sidenavHeight="100%" }) => {
             )}            
           </Accordion>
         </div>
+        <EnvironmentBadge />
         {(APPLICATION_NAME === "roadsafety") && isAuthenticated && (
           <DateTimeNetworkWidget/>
         )}
