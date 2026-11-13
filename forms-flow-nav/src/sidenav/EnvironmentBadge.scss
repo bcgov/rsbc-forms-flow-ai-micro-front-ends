@@ -1,0 +1,33 @@
+.environment-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  border-radius: 4px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+
+  &.badge-development {
+    background-color: #4f46e5;
+    color: white;
+  }
+
+  &.badge-test {
+    background-color: #f59e0b;
+    color: white;
+  }
+
+  &.badge-training {
+    background-color: #10b981;
+    color: white;
+  }
+
+  &.badge-default {
+    background-color: #6b7280;
+    color: white;
+  }
+}

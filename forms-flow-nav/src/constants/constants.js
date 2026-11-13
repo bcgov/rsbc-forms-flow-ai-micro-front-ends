@@ -93,6 +93,9 @@ export const ENABLE_SUPPORT_MODULE =
     ? false
     : true;
 
+export const ENVIRONMENT_NAME = 
+  (window._env_ && window._env_.REACT_APP_ENVIRONMENT_NAME) || "Development";
+
 export const KEYCLOAK_URL_HTTP_RELATIVE_PATH =
     (window._env_ && window._env_.REACT_APP_KEYCLOAK_URL_HTTP_RELATIVE_PATH) || '/auth';
   

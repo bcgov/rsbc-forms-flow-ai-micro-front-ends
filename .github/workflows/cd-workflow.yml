@@ -77,6 +77,9 @@ jobs:
           context: ${{ inputs.DOCKER_CONTEXT }}
           file: ${{ inputs.DOCKER_FILE }}
           push: true
+          provenance: false
+          sbom: false
+          outputs: type=image,oci-mediatypes=false,push=true
           platforms: linux/amd64
           build-args: |
             VERSION=${{ env.VERSION }}
