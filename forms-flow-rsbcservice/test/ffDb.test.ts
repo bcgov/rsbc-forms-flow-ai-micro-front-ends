@@ -1,6 +1,22 @@
-import { ffDb } from "../src/storage/ffDb";
+import Dexie from "dexie";
 
 describe("formsflow database schema", () => {
+  let ffDb: typeof import("../src/storage/ffDb").ffDb;
+
+  beforeAll(async () => {
+    const open = jest.spyOn(Dexie.prototype, "open").mockImplementation(function () {
+      return Dexie.Promise.resolve(this);
+    });
+    const log = jest.spyOn(console, "log").mockImplementation(() => undefined);
+
+    try {
+      ({ ffDb } = await import("../src/storage/ffDb"));
+    } finally {
+      open.mockRestore();
+      log.mockRestore();
+    }
+  });
+
   it("preserves primary keys while exposing the new scalar indexes", () => {
     expect(ffDb.verno).toBe(2);
     expect(ffDb.applications.schema.primKey.name).toBe("id");
@@ -12,8 +28,9 @@ describe("formsflow database schema", () => {
 
     expect(ffDb.applications.schema.idxByName.serverDraftId).toBeDefined();
     expect(ffDb.offlineSubmissions.schema.idxByName.serverApplicationId).toBeDefined();
-    expect(ffDb.formDefinitions.schema.idxByName.display).toBeDefined();
-    expect(ffDb.formProcesses.schema.idxByName.processKey).toBeDefined();
+    expect(ffDb.offlineSubmissions.schema.idxByName.created).toBeDefined();
+    expect(ffDb.formDefinitions.schema.idxByName.title).toBeDefined();
+    expect(ffDb.formProcesses.schema.idxByName.formName).toBeDefined();
     expect(ffDb.offlineSubmissions.schema.idxByName.data).toBeUndefined();
   });
 });
