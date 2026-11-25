@@ -166,12 +166,17 @@ class DBServiceHelper {
     formId: string,
     submissionId: string,
     formData: any,
-    submission: any
+    submission: any,
+    serverDraftId?: string
   ): Application {
     const userDetails = this.getUserDetails();
     const randomId = this.generateRandomNumber();
     const now = new Date().toISOString();
     const applicationName = formData?.form?.title;
+    let _serverDraftId: number|undefined = Number(serverDraftId);
+    if (isNaN(_serverDraftId)) {
+      _serverDraftId = undefined;
+    }
 
     return {
       applicationName: applicationName,
@@ -193,6 +198,7 @@ class DBServiceHelper {
       processTenant: null,
       submissionId,
       dashboardColumns: submission?.data?.dashboardColumns,
+      serverDraftId: _serverDraftId,
     };
   }
 

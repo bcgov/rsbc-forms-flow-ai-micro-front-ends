@@ -60,6 +60,7 @@ export interface Application {
   processTenant: string;
   submissionId: string;
   dashboardColumns: Record<string, any>[];
+  serverDraftId?: number;
 }
 
 export interface Draft {
@@ -175,6 +176,17 @@ class FormsFlowDB extends Dexie {
       applications: "id, modified, formId, submissionId",
       offlineSubmissions:
         "_id, formId, localSubmissionId, localDraftId, type, modified, serverDraftId",
+      formDefinitions:
+        "_id, title, description, name, path, type, created, modified, machineName, parentFormId",
+      activeForm: "localDraftId, serverDraftId",
+      formProcesses: "formId, formName",
+      deletedDrafts: "serverDraftId",
+    });
+
+    this.version(2).stores({
+      applications: "id, modified, formId, submissionId, serverDraftId",
+      offlineSubmissions:
+        "_id, formId, localDraftId, serverDraftId, serverApplicationId, localSubmissionId, created, modified, type",
       formDefinitions:
         "_id, title, description, name, path, type, created, modified, machineName, parentFormId",
       activeForm: "localDraftId, serverDraftId",
