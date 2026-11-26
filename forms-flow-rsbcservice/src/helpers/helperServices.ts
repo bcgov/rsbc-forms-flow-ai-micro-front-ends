@@ -275,7 +275,7 @@ const processFieldValue = (
       values[data.field_name]
     )
   )
-    return moment(values[data.field_name]).format(
+    return moment(values[data.field_name]).tz("UTC").format(
       data.date_val || "YYYY-MM-DD"
     );
   if (Array.isArray(values[data.field_name]))

@@ -12,7 +12,6 @@ import {
 } from "./printUtils";
 import _ from "lodash";
 import "./printContainer.scss";
-import { max } from "moment";
 
 export default class RSBCImage extends ReactComponent {
   data: any;
