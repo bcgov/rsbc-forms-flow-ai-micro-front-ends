@@ -448,7 +448,8 @@ class OfflineSaveService {
         formId,
         draft.localSubmissionId,
         formData,
-        data
+        data,
+        serverDraftId
       );
       await this.saveFFDataToIndexedDB("offlineSubmission", draft);
       await this.saveFFDataToIndexedDB("applications", applicationData);

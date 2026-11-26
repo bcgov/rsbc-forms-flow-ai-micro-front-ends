@@ -82,7 +82,8 @@ class OfflineEditService {
         formId,
         draft.localSubmissionId,
         formData,
-        newSubmissionData
+        newSubmissionData,
+        serverDraftId
       );
       await OfflineSaveService.saveFFDataToIndexedDB(
         "applications",
